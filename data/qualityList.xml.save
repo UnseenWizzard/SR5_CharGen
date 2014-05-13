@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<list>
+<Quality><name>Ambidextrous</name><notes>Suffer no 
+</notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>4</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Analytical Mind</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>5</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Aptitude</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>14</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Astral Chameleon</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Bilingual</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>5</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Blandness</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>8</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Catlike</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>7</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Codeslinger</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Double-Jointed</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>6</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Exceptional Attribute</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>14</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>First Impression</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>11</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Focused Concentration</name><notes></notes><positive>true</positive><isLeveled>true</isLeveled><APcost__bonus>4</APcost__bonus><maxLevel>6</maxLevel></Quality>
+<Quality><name>Gearhead</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>11</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Guts</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>High Pain Tolerance</name><notes></notes><positive>true</positive><isLeveled>true</isLeveled><APcost__bonus>7</APcost__bonus><maxLevel>3</maxLevel></Quality>
+<Quality><name>Home Ground</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Human-Looking</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>6</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Indomitable</name><notes></notes><positive>true</positive><isLeveled>true</isLeveled><APcost__bonus>8</APcost__bonus><maxLevel>3</maxLevel></Quality>
+<Quality><name>Juryrigger</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Lucky</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>12</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Magical Resistance</name><notes></notes><positive>true</positive><isLeveled>true</isLeveled><APcost__bonus>6</APcost__bonus><maxLevel>4</maxLevel></Quality>
+<Quality><name>Mentor Spirit</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>5</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Natural Athlete</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>7</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Natural Hardening</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Natural Immunity (natural disease or toxin)</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>4</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Natural Immunity (synthetic disease or toxin)</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Photographic Memory</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>6</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Quick Healer</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>3</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Resistance to pathogenes</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>4</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Resistance to toxins</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>4</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Spirit Affinity</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>7</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Toughness</name><notes></notes><positive>true</positive><isLeveled>false</isLeveled><APcost__bonus>9</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Will to Live</name><notes></notes><positive>true</positive><isLeveled>true</isLeveled><APcost__bonus>3</APcost__bonus><maxLevel>3</maxLevel></Quality>
+<Quality><name>Addiction (Mild)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>4</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Addiction (Moderate)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>9</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Addiction (Severe)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>20</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Addiction (Burnout)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>25</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Allergy (Uncommon)(Mild)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>5</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Allergy (Uncommon)(Moderate)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Allergy (Uncommon)(Severe)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>15</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Allergy (Uncommon)(Extreme)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>20</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Allergy (Common)(Mild)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Allergy (Common)(Moderate)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>15</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Allergy (Common)(Severe)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>20</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Allergy (Common)(Extreme)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>25</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Astral Beacon</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Bad Luck</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>12</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Bad Rep</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>7</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Code of Honor</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>15</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Codeblock</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Combat Paralysis</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>12</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Dependent(s)</name><notes></notes><positive>false</positive><isLeveled>true</isLeveled><APcost__bonus>3</APcost__bonus><maxLevel>3</maxLevel></Quality>
+<Quality><name>Distinctive Style</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>5</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Elf Poser</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>6</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Gremlins</name><notes></notes><positive>false</positive><isLeveled>true</isLeveled><APcost__bonus>4</APcost__bonus><maxLevel>4</maxLevel></Quality>
+<Quality><name>Incompetent</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>5</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Insomnia (Mild)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Insomnia (Severe)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>15</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Loss of Confidence</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Low Pain Tolerance</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>9</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Ork Poser</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>6</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Prejudiced (Common Target)(Biased)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>5</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Prejudiced (Common Target)(Outspoken)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>7</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Prejudiced (Common Target)(Radical)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Prejudiced (Specific Target)(Biased)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>3</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Prejudiced (Specific Target)(Outspoken)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>5</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Prejudiced (Specific Target)(Radical)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>8</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Scorched</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Sensitive System</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>12</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Simsense Vertigo</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>5</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>SINner (National)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>5</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>SINner (Criminal)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>SINner (Corporate Limited)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>15</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>SINner (Corporate)</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>25</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Social Stress</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>8</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Spirit Bane</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>7</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Uncouth</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>14</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Uneducated</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>8</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+<Quality><name>Unsteady Hands</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>7</APcost__bonus><maxLevel>-1</maxLevel></Quality><Quality><name>Weak Immune System</name><notes></notes><positive>false</positive><isLeveled>false</isLeveled><APcost__bonus>10</APcost__bonus><maxLevel>-1</maxLevel></Quality>
+</list>
