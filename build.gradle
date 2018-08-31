@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    jcenter()
+}
+
+
+dependencies {
+    compile 'org.apache.pdfbox:pdfbox-app:1.8.4'
+
+    compile 'com.thoughtworks.xstream:xstream:1.4.10'
+
+    testImplementation 'junit:junit:4.12'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'gui.MainFrame'
+    }
+
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}
+
+task packageForDistribution(type : Zip) {
+    from ('./build/libs/') {
+        include 'SR5-char-gen.jar'
+        into 'SR5-char-gen'
+    }
+
+    from ('.') {
+        include 'characters'
+        include 'data'
+        include 'images'
+        into 'SR5-char-gen'
+    }
+
+
+    archiveName 'SR5-char-gen.zip'
+    destinationDir(file('./release/'))
+}

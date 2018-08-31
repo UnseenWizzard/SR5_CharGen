@@ -1,3 +1,6 @@
 .idea/
 SR5_CharGen.iml
 out/
+.gradle
+/build/
+release/
