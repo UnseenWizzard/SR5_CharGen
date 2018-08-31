@@ -113,6 +113,8 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
+import io.github.unseenwizzard.sr5chargen.data.character.*;
+import io.github.unseenwizzard.sr5chargen.data.character.Character;
 import io.github.unseenwizzard.sr5chargen.utils.dice.Die;
 import io.github.unseenwizzard.sr5chargen.utils.dice.DieRoll;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -121,30 +123,27 @@ import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
-import data.Ammunition;
-import data.Armor;
-import data.Augmentation;
-import data.Character;
-import data.Magical;
-import data.Deck;
-import data.Gear;
-import data.LifeStyle;
-import data.Power;
-import data.RangedWeapon;
-import data.Skill.Attribute;
-import data.Vehicle.CraftType;
-import data.AmmoType;
-import data.Contact;
-import data.ID;
-import data.MeeleWeapon;
-import data.Mode;
-import data.Program;
-import data.Quality;
-import data.Skill;
-import data.SkillGroup;
-import data.Spell;
-import data.Vehicle;
-import data.WeaponModification;
+import io.github.unseenwizzard.sr5chargen.data.equipment.weapon.Ammunition;
+import io.github.unseenwizzard.sr5chargen.data.equipment.armor.Armor;
+import io.github.unseenwizzard.sr5chargen.data.equipment.personal.Augmentation;
+import io.github.unseenwizzard.sr5chargen.data.equipment.decking.Deck;
+import io.github.unseenwizzard.sr5chargen.data.equipment.Gear;
+import io.github.unseenwizzard.sr5chargen.data.character.Power;
+import io.github.unseenwizzard.sr5chargen.data.equipment.weapon.RangedWeapon;
+import io.github.unseenwizzard.sr5chargen.data.character.Skill.Attribute;
+import io.github.unseenwizzard.sr5chargen.data.equipment.Vehicle.CraftType;
+import io.github.unseenwizzard.sr5chargen.data.equipment.weapon.AmmoType;
+import io.github.unseenwizzard.sr5chargen.data.Contact;
+import io.github.unseenwizzard.sr5chargen.data.equipment.personal.ID;
+import io.github.unseenwizzard.sr5chargen.data.equipment.weapon.MeeleWeapon;
+import io.github.unseenwizzard.sr5chargen.data.equipment.weapon.Mode;
+import io.github.unseenwizzard.sr5chargen.data.equipment.decking.Program;
+import io.github.unseenwizzard.sr5chargen.data.character.Quality;
+import io.github.unseenwizzard.sr5chargen.data.character.Skill;
+import io.github.unseenwizzard.sr5chargen.data.character.SkillGroup;
+import io.github.unseenwizzard.sr5chargen.data.character.Spell;
+import io.github.unseenwizzard.sr5chargen.data.equipment.Vehicle;
+import io.github.unseenwizzard.sr5chargen.data.equipment.weapon.WeaponModification;
 import io.github.unseenwizzard.sr5chargen.utils.dice.DieRoller;
 import io.github.unseenwizzard.sr5chargen.utils.ListRoutine;
 import io.github.unseenwizzard.sr5chargen.utils.RandomRunGenerator;
@@ -157,7 +156,7 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private int frameWidth = 900;
 	private int frameHeight = 600;
-	private data.Character currentCharacter;
+	private Character currentCharacter;
 	private int charSpecialAttributes, initValueCharSpecialAttributes = -1;
 	private int charAttributes = -1;
 	private MagicResonancePriority[] charMagicResonance;
@@ -310,14 +309,14 @@ public class MainFrame extends JFrame {
 		AbstractDocument d= (AbstractDocument)nameInput.getDocument();
 		d.setDocumentFilter(new DocumentSizeFilter(26));
 
-		final JComboBox<data.Sex> sexInput = new JComboBox<data.Sex>();
-		for (data.Sex s : data.Sex.values()) {
+		final JComboBox<Sex> sexInput = new JComboBox<Sex>();
+		for (Sex s : Sex.values()) {
 			sexInput.addItem(s);
 		}
 		sexInput.setSelectedIndex(0);
 
-		final JComboBox<data.Metatype> metatypeInput = new JComboBox<data.Metatype>();
-		for (data.Metatype t : data.Metatype.values()) {
+		final JComboBox<Metatype> metatypeInput = new JComboBox<Metatype>();
+		for (Metatype t : Metatype.values()) {
 			metatypeInput.addItem(t);
 		}
 		metatypeInput.setSelectedIndex(0);
@@ -328,12 +327,12 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String charName = nameInput.getText();
-				data.Sex charSex = (data.Sex) sexInput.getSelectedItem();
-				data.Metatype charType = (data.Metatype) metatypeInput.getSelectedItem();
+				Sex charSex = (Sex) sexInput.getSelectedItem();
+				Metatype charType = (Metatype) metatypeInput.getSelectedItem();
 				System.out.println("Name is:[" + charName + "]");
 				String pathText = "images/female.png";
 				if (charName.isEmpty()) {
-					if (charSex == data.Sex.FEMALE) {
+					if (charSex == Sex.FEMALE) {
 						charName = "Jane Doe";
 					} else {
 						charName = "John Doe";
@@ -351,7 +350,7 @@ public class MainFrame extends JFrame {
 				if (path!=null && path.getAbsolutePath().endsWith("SR5CharGen.jar"))
 					pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+pathText);
 				
-				currentCharacter = new data.Character(charType, charName, charSex);
+				currentCharacter = new Character(charType, charName, charSex);
 				currentCharacter.getPersonalData().addKarma(25);
 				currentCharacter.getPersonalData().setName(charName);
 
@@ -451,16 +450,16 @@ public class MainFrame extends JFrame {
 
 
 		TypePriority[] pType = new TypePriority[5];
-		data.Metatype[] type = { data.Metatype.HUMAN, data.Metatype.ELF,
-				data.Metatype.DWARF, data.Metatype.ORC, data.Metatype.TROLL };
+		Metatype[] type = { Metatype.HUMAN, Metatype.ELF,
+				Metatype.DWARF, Metatype.ORC, Metatype.TROLL };
 		int[] specialAttributes = { 9, 8, 7, 7, 5 };
 		int[] specialAttributes1 = { 7, 6, 4, 4, 0 };
-		data.Metatype[] type2 = { data.Metatype.HUMAN, data.Metatype.ELF,
-				data.Metatype.DWARF, data.Metatype.ORC };
+		Metatype[] type2 = { Metatype.HUMAN, Metatype.ELF,
+				Metatype.DWARF, Metatype.ORC };
 		int[] specialAttributes2 = { 5, 3, 1, 0 };
-		data.Metatype[] type3 = { data.Metatype.HUMAN, data.Metatype.ELF };
+		Metatype[] type3 = { Metatype.HUMAN, Metatype.ELF };
 		int[] specialAttributes3 = { 3, 0 };
-		data.Metatype[] type4 = { data.Metatype.HUMAN };
+		Metatype[] type4 = { Metatype.HUMAN };
 		int[] specialAttributes4 = { 1 };
 		pType[0] = new TypePriority(type, specialAttributes);
 		pType[1] = new TypePriority(type, specialAttributes1);
@@ -755,8 +754,8 @@ public class MainFrame extends JFrame {
 		clearContents();
 		GridBagConstraints constraints = new GridBagConstraints();
 
-		data.Attributes baseAttributes = new data.Attributes();
-		if (currentCharacter.getPersonalData().getMetatype() == data.Metatype.HUMAN) {
+		Attributes baseAttributes = new Attributes();
+		if (currentCharacter.getPersonalData().getMetatype() == Metatype.HUMAN) {
 			baseAttributes.setBody(1);
 			baseAttributes.setMAXbody(6);
 			baseAttributes.setAgility(1);
@@ -780,7 +779,7 @@ public class MainFrame extends JFrame {
 			baseAttributes.setMAXresonance(6);
 			baseAttributes.setMagic(0);
 			baseAttributes.setMAXmagic(6);
-		} else if (currentCharacter.getPersonalData().getMetatype() == data.Metatype.ELF) {
+		} else if (currentCharacter.getPersonalData().getMetatype() == Metatype.ELF) {
 			baseAttributes.setBody(1);
 			baseAttributes.setMAXbody(6);
 			baseAttributes.setAgility(2);
@@ -804,7 +803,7 @@ public class MainFrame extends JFrame {
 			baseAttributes.setMAXresonance(6);
 			baseAttributes.setMagic(0);
 			baseAttributes.setMAXmagic(6);
-		} else if (currentCharacter.getPersonalData().getMetatype() == data.Metatype.DWARF) {
+		} else if (currentCharacter.getPersonalData().getMetatype() == Metatype.DWARF) {
 			baseAttributes.setBody(3);
 			baseAttributes.setMAXbody(8);
 			baseAttributes.setAgility(1);
@@ -828,7 +827,7 @@ public class MainFrame extends JFrame {
 			baseAttributes.setMAXresonance(6);
 			baseAttributes.setMagic(0);
 			baseAttributes.setMAXmagic(6);
-		} else if (currentCharacter.getPersonalData().getMetatype() == data.Metatype.ORC) {
+		} else if (currentCharacter.getPersonalData().getMetatype() == Metatype.ORC) {
 			baseAttributes.setBody(4);
 			baseAttributes.setMAXbody(9);
 			baseAttributes.setAgility(1);
@@ -852,7 +851,7 @@ public class MainFrame extends JFrame {
 			baseAttributes.setMAXresonance(6);
 			baseAttributes.setMagic(0);
 			baseAttributes.setMAXmagic(6);
-		} else if (currentCharacter.getPersonalData().getMetatype() == data.Metatype.TROLL) {
+		} else if (currentCharacter.getPersonalData().getMetatype() == Metatype.TROLL) {
 			baseAttributes.setBody(5);
 			baseAttributes.setMAXbody(10);
 			baseAttributes.setAgility(1);
@@ -930,7 +929,7 @@ public class MainFrame extends JFrame {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					currentCharacter = new data.Character(currentCharacter.getPersonalData().getMetatype(), currentCharacter.getPersonalData().getName(), currentCharacter.getPersonalData().getSex());
+					currentCharacter = new Character(currentCharacter.getPersonalData().getMetatype(), currentCharacter.getPersonalData().getName(), currentCharacter.getPersonalData().getSex());
 					currentCharacter.getPersonalData().addKarma(25);
 					currentCharacter.getPersonalData().setName(currentCharacter.getPersonalData().getName());
 					priorityChoosing();
@@ -1198,7 +1197,7 @@ public class MainFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				currentCharacter = new data.Character(currentCharacter.getPersonalData().getMetatype(), currentCharacter.getPersonalData().getName(), currentCharacter.getPersonalData().getSex());
+				currentCharacter = new Character(currentCharacter.getPersonalData().getMetatype(), currentCharacter.getPersonalData().getName(), currentCharacter.getPersonalData().getSex());
 				currentCharacter.getPersonalData().addKarma(25);
 				currentCharacter.getPersonalData().setName(currentCharacter.getPersonalData().getName());
 				
@@ -1233,7 +1232,7 @@ public class MainFrame extends JFrame {
 									"Attribute points spent",
 									JOptionPane.ERROR_MESSAGE);
 				} else {
-					data.Attributes attr = currentCharacter.getAttributes();
+					Attributes attr = currentCharacter.getAttributes();
 					if (currentCharacter.getMagicalness().equals(Magical.Adept)) {
 						attr.setAdeptPowerPoints(attr.getMagic());
 					}
@@ -3988,7 +3987,7 @@ public class MainFrame extends JFrame {
 					infoPanel.add(done,BorderLayout.EAST);
 				
 				infoPanel.revalidate();infoPanel.repaint();
-				data.PersData per = currentCharacter.getPersonalData();
+				PersData per = currentCharacter.getPersonalData();
 				GridBagConstraints con = new GridBagConstraints();
 				con.fill = GridBagConstraints.BOTH;
 				con.gridx = 0;
@@ -4166,7 +4165,7 @@ public class MainFrame extends JFrame {
 				if (characterGeneration) 
 					infoPanel.add(done,BorderLayout.EAST);
 				
-				data.PersData per = currentCharacter.getPersonalData();
+				PersData per = currentCharacter.getPersonalData();
 				GridBagConstraints con = new GridBagConstraints();
 				con.fill = GridBagConstraints.BOTH;
 				con.gridx = 0;
@@ -4252,7 +4251,7 @@ public class MainFrame extends JFrame {
 				
 				currentCharacter.getAttributes().evaluate();
 				
-				data.Attributes atr = currentCharacter.getAttributes();
+				Attributes atr = currentCharacter.getAttributes();
 				GridBagConstraints con = new GridBagConstraints();
 				con.fill = GridBagConstraints.BOTH;
 				con.gridx = 0;
@@ -12471,10 +12470,10 @@ public class MainFrame extends JFrame {
 	}
 
 	private class TypePriority {
-		private data.Metatype[] type;
+		private Metatype[] type;
 		private int[] specialAttributes;
 
-		private TypePriority(data.Metatype[] type, int[] specialAttributes) {
+		private TypePriority(Metatype[] type, int[] specialAttributes) {
 			this.type = type;
 			this.specialAttributes = specialAttributes;
 		}
@@ -13471,7 +13470,7 @@ private void setCharPic(){
 				contentStream.moveTextPositionByAmount(0, -13);
 				text="";
 				int IDCount=0;
-				for (data.ID id:currentCharacter.getFakeIDs()){
+				for (ID id:currentCharacter.getFakeIDs()){
 					String addition=id.getName()+"("+id.getRating()+"),";
 					if (IDCount<4&&font.getStringWidth(text+addition)/1000*9>standardBoxWidth-5){
 						text=text.substring(0, text.length()-1);
@@ -13956,7 +13955,7 @@ private void setCharPic(){
 				contentStream2.moveTextPositionByAmount(0, -13);
 				contentStream2.drawString("Programs: ");
 				text="";
-				for (data.Program id:currentCharacter.getPrograms()){
+				for (Program id:currentCharacter.getPrograms()){
 					String addition=id.getName()+", ";
 					if (font.getStringWidth(text+addition)/1000*9>standardBoxWidth-5){
 						text=text.substring(0, text.length()-2);
