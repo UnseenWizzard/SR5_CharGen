@@ -72,7 +72,7 @@ Apache PDFBox, PDFBox, Apache, the Apache feather logo and the Apache PDFBox pro
  * 		0 condition boxes resize aqwardly when clicked		
  * 
  */
-package gui;
+package io.github.unseenwizzard.sr5chargen.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -84,30 +84,21 @@ import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
 import java.net.URISyntaxException;
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -117,28 +108,18 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
-import org.apache.pdfbox.exceptions.COSVisitorException;
-import org.apache.pdfbox.pdfwriter.ContentStreamWriter;
+import io.github.unseenwizzard.sr5chargen.utils.dice.Die;
+import io.github.unseenwizzard.sr5chargen.utils.dice.DieRoll;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-
-import com.ibm.icu.impl.duration.impl.Utils;
-import com.ibm.icu.impl.duration.impl.YMDDateFormatter;
-import com.ibm.icu.util.Currency;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.extended.ToStringConverter;
-import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 import data.Ammunition;
 import data.Armor;
@@ -164,9 +145,11 @@ import data.SkillGroup;
 import data.Spell;
 import data.Vehicle;
 import data.WeaponModification;
-import routines.DieRoller;
-import routines.ListRoutine;
-import routines.RandomRunGenerator;
+import io.github.unseenwizzard.sr5chargen.utils.dice.DieRoller;
+import io.github.unseenwizzard.sr5chargen.utils.ListRoutine;
+import io.github.unseenwizzard.sr5chargen.utils.RandomRunGenerator;
+
+import static io.github.unseenwizzard.sr5chargen.utils.dice.DieRoll.Result.CRITICAL_GLITCH;
 
 public class MainFrame extends JFrame {
 
@@ -3756,12 +3739,9 @@ public class MainFrame extends JFrame {
 				currentCharacter.getPersonalData().setLifestyle(
 						lifeStyles[index]);
 				DieRoller roller=new DieRoller();;
-				int[] roll =roller.rollDice(lifeStyles[index]
+				DieRoll roll =roller.rollDice(lifeStyles[index]
 						.getCapitalDice());
-				int plus = 0;
-				for (int i = 2; i < roll.length; i++) {
-					plus += roll[i];
-				}
+				int plus = roll.getDice().stream().mapToInt(Die::getRolledValue).sum();
 				JOptionPane.showMessageDialog(panel,
 						"You rolled " + plus + ", resulting in " + plus
 								* lifeStyles[index].getCapitalMod() + " NuYen!");
@@ -8642,10 +8622,10 @@ public class MainFrame extends JFrame {
 								.get(currentCharacter.getSkillGroups().indexOf(
 										influence)).getValue();
 					}
-					int[] roll = roller.rollDice(you);
-					if (roll[0] > 0) {
+					DieRoll roll = roller.rollDice(you);
+					if (roll.isGlitched()) {
 						String crit = "";
-						if (roll[0] > 1) {
+						if (roll.getResult() == CRITICAL_GLITCH) {
 							crit += " critical";
 						}
 						JOptionPane
@@ -8657,14 +8637,14 @@ public class MainFrame extends JFrame {
 										"Glitch", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					you = roll[1];
+					you = (int)roll.getNumberOfSuccesses();
 					if (you > currentCharacter.getAttributes().getSocialLimit()) {
 						you = currentCharacter.getAttributes().getSocialLimit();
 					}
 					roll = roller.rollDice((int) nego.getValue()
 							+ (int) cha.getValue());
-					int buy = roll[1];
-					if (roll[0] > 0) {
+					int buy = (int)roll.getNumberOfSuccesses();
+					if (roll.isGlitched()) {
 						buy = 0;
 					}
 					if (buy > (int) social.getValue()) {
@@ -8920,10 +8900,10 @@ public class MainFrame extends JFrame {
 								.get(currentCharacter.getSkillGroups().indexOf(
 										influence)).getValue();
 					}
-					int[] roll = roller.rollDice(you);
-					if (roll[0] > 0) {
+					DieRoll roll = roller.rollDice(you);
+					if (roll.isGlitched()) {
 						String crit = "";
-						if (roll[0] > 1) {
+						if (roll.getResult() == CRITICAL_GLITCH) {
 							crit += " critical";
 						}
 						JOptionPane
@@ -8935,14 +8915,14 @@ public class MainFrame extends JFrame {
 										"Glitch", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					you = roll[1];
+					you = (int)roll.getNumberOfSuccesses();
 					if (you > currentCharacter.getAttributes().getSocialLimit()) {
 						you = currentCharacter.getAttributes().getSocialLimit();
 					}
 					roll = roller.rollDice((int) nego.getValue()
 							+ (int) cha.getValue());
-					int buy = roll[1];
-					if (roll[0] > 0) {
+					int buy = (int)roll.getNumberOfSuccesses();
+					if (roll.isGlitched()) {
 						buy = 0;
 					}
 					if (buy > (int) social.getValue()) {
@@ -9281,10 +9261,10 @@ public class MainFrame extends JFrame {
 								.get(currentCharacter.getSkillGroups().indexOf(
 										influence)).getValue();
 					}
-					int[] roll = roller.rollDice(you);
-					if (roll[0] > 0) {
+					DieRoll roll = roller.rollDice(you);
+					if (roll.isGlitched()) {
 						String crit = "";
-						if (roll[0] > 1) {
+						if (roll.getResult() == CRITICAL_GLITCH) {
 							crit += " critical";
 						}
 						JOptionPane
@@ -9296,14 +9276,14 @@ public class MainFrame extends JFrame {
 										"Glitch", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					you = roll[1];
+					you = (int)roll.getNumberOfSuccesses();
 					if (you > currentCharacter.getAttributes().getSocialLimit()) {
 						you = currentCharacter.getAttributes().getSocialLimit();
 					}
 					roll = roller.rollDice((int) nego.getValue()
 							+ (int) cha.getValue());
-					int buy = roll[1];
-					if (roll[0] > 0) {
+					int buy = (int)roll.getNumberOfSuccesses();
+					if (roll.isGlitched()) {
 						buy = 0;
 					}
 					if (buy > (int) social.getValue()) {
@@ -9583,10 +9563,10 @@ public class MainFrame extends JFrame {
 								.get(currentCharacter.getSkillGroups().indexOf(
 										influence)).getValue();
 					}
-					int[] roll = roller.rollDice(you);
-					if (roll[0] > 0) {
+					DieRoll roll = roller.rollDice(you);
+					if (roll.isGlitched()) {
 						String crit = "";
-						if (roll[0] > 1) {
+						if (roll.getResult() == CRITICAL_GLITCH) {
 							crit += " critical";
 						}
 						JOptionPane
@@ -9598,14 +9578,14 @@ public class MainFrame extends JFrame {
 										"Glitch", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					you = roll[1];
+					you = (int)roll.getNumberOfSuccesses();
 					if (you > currentCharacter.getAttributes().getSocialLimit()) {
 						you = currentCharacter.getAttributes().getSocialLimit();
 					}
 					roll = roller.rollDice((int) nego.getValue()
 							+ (int) cha.getValue());
-					int buy = roll[1];
-					if (roll[0] > 0) {
+					int buy = (int)roll.getNumberOfSuccesses();
+					if (roll.isGlitched()) {
 						buy = 0;
 					}
 					if (buy > (int) social.getValue()) {
@@ -9921,10 +9901,10 @@ public class MainFrame extends JFrame {
 								.get(currentCharacter.getSkillGroups().indexOf(
 										influence)).getValue();
 					}
-					int[] roll = roller.rollDice(you);
-					if (roll[0] > 0) {
+					DieRoll roll = roller.rollDice(you);
+					if (roll.isGlitched()) {
 						String crit = "";
-						if (roll[0] > 1) {
+						if (roll.getResult() == CRITICAL_GLITCH) {
 							crit += " critical";
 						}
 						JOptionPane
@@ -9936,14 +9916,14 @@ public class MainFrame extends JFrame {
 										"Glitch", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					you = roll[1];
+					you = (int)roll.getNumberOfSuccesses();
 					if (you > currentCharacter.getAttributes().getSocialLimit()) {
 						you = currentCharacter.getAttributes().getSocialLimit();
 					}
 					roll = roller.rollDice((int) nego.getValue()
 							+ (int) cha.getValue());
-					int buy = roll[1];
-					if (roll[0] > 0) {
+					int buy = (int)roll.getNumberOfSuccesses();
+					if (roll.isGlitched()) {
 						buy = 0;
 					}
 					if (buy > (int) social.getValue()) {
@@ -10214,10 +10194,10 @@ public class MainFrame extends JFrame {
 								.get(currentCharacter.getSkillGroups().indexOf(
 										influence)).getValue();
 					}
-					int[] roll = roller.rollDice(you);
-					if (roll[0] > 0) {
+					DieRoll roll = roller.rollDice(you);
+					if (roll.isGlitched()) {
 						String crit = "";
-						if (roll[0] > 1) {
+						if (roll.getResult() == CRITICAL_GLITCH) {
 							crit += " critical";
 						}
 						JOptionPane
@@ -10229,14 +10209,14 @@ public class MainFrame extends JFrame {
 										"Glitch", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					you = roll[1];
+					you = (int)roll.getNumberOfSuccesses();
 					if (you > currentCharacter.getAttributes().getSocialLimit()) {
 						you = currentCharacter.getAttributes().getSocialLimit();
 					}
 					roll = roller.rollDice((int) nego.getValue()
 							+ (int) cha.getValue());
-					int buy = roll[1];
-					if (roll[0] > 0) {
+					int buy = (int)roll.getNumberOfSuccesses();
+					if (roll.isGlitched()) {
 						buy = 0;
 					}
 					if (buy > (int) social.getValue()) {
@@ -10536,10 +10516,10 @@ public class MainFrame extends JFrame {
 								.get(currentCharacter.getSkillGroups().indexOf(
 										influence)).getValue();
 					}
-					int[] roll = roller.rollDice(you);
-					if (roll[0] > 0) {
+					DieRoll roll = roller.rollDice(you);
+					if (roll.isGlitched()) {
 						String crit = "";
-						if (roll[0] > 1) {
+						if (roll.getResult() == CRITICAL_GLITCH) {
 							crit += " critical";
 						}
 						JOptionPane
@@ -10551,14 +10531,14 @@ public class MainFrame extends JFrame {
 										"Glitch", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					you = roll[1];
+					you = (int)roll.getNumberOfSuccesses();
 					if (you > currentCharacter.getAttributes().getSocialLimit()) {
 						you = currentCharacter.getAttributes().getSocialLimit();
 					}
 					roll = roller.rollDice((int) nego.getValue()
 							+ (int) cha.getValue());
-					int buy = roll[1];
-					if (roll[0] > 0) {
+					int buy = (int)roll.getNumberOfSuccesses();
+					if (roll.isGlitched()) {
 						buy = 0;
 					}
 					if (buy > (int) social.getValue()) {
@@ -10809,10 +10789,10 @@ public class MainFrame extends JFrame {
 								.get(currentCharacter.getSkillGroups().indexOf(
 										influence)).getValue();
 					}
-					int[] roll = roller.rollDice(you);
-					if (roll[0] > 0) {
+					DieRoll roll = roller.rollDice(you);
+					if (roll.isGlitched()) {
 						String crit = "";
-						if (roll[0] > 1) {
+						if (roll.getResult() == CRITICAL_GLITCH) {
 							crit += " critical";
 						}
 						JOptionPane
@@ -10824,14 +10804,14 @@ public class MainFrame extends JFrame {
 										"Glitch", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					you = roll[1];
+					you = (int)roll.getNumberOfSuccesses();
 					if (you > currentCharacter.getAttributes().getSocialLimit()) {
 						you = currentCharacter.getAttributes().getSocialLimit();
 					}
 					roll = roller.rollDice((int) nego.getValue()
 							+ (int) cha.getValue());
-					int buy = roll[1];
-					if (roll[0] > 0) {
+					int buy = (int)roll.getNumberOfSuccesses();
+					if (roll.isGlitched()) {
 						buy = 0;
 					}
 					if (buy > (int) social.getValue()) {
@@ -14940,7 +14920,7 @@ private void setCharPic(){
 			return;
 		}
 		DieRoller roller=new DieRoller();
-		int[] roll=roller.rollDice((int)dice.getValue());
+		DieRoll roll=roller.rollDice((int)dice.getValue());
 		int limitThresh=0;
 		switch(limit.getSelectedIndex()){
 			case 0:
@@ -14956,9 +14936,12 @@ private void setCharPic(){
 				limitThresh=currentCharacter.getAttributes().getSocialLimit();
 				break;
 		}
-		roll[1]=(limitThresh>0&&roll[1]>limitThresh)?limitThresh:roll[1];
-		String crit = roll[0]>1?"Critical ":"";
-		String text=roll[0]>0?crit+"Glitch!":roll[1]+" Successes!";
+		int successes =
+                (limitThresh>0&&(int)roll.getNumberOfSuccesses()>limitThresh)?
+                limitThresh :
+                (int)roll.getNumberOfSuccesses();
+		String crit = roll.getResult().equals(CRITICAL_GLITCH)?"Critical ":"";
+		String text=roll.isGlitched()?crit+"Glitch!":(int)roll.getNumberOfSuccesses()+" Successes!";
 		JOptionPane.showMessageDialog(this.getContentPane(), text);
 
 	}

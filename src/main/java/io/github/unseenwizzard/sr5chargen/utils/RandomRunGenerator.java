@@ -1,4 +1,7 @@
-package routines;
+package io.github.unseenwizzard.sr5chargen.utils;
+
+import io.github.unseenwizzard.sr5chargen.utils.dice.DieRoll;
+import io.github.unseenwizzard.sr5chargen.utils.dice.DieRoller;
 
 public class RandomRunGenerator {
 	
@@ -149,20 +152,20 @@ public class RandomRunGenerator {
 	public static String generateRandomRun (){
 		String run = "";
 		DieRoller roller=new DieRoller();
-		int dice[] = roller.rollDice(1);
-		System.out.println(dice[2]);
-		run+=genVenue(dice[2]);
-		int[] t = roller.rollDice(2);
-		run+=genEmployer(t[2]+t[3]);
+		DieRoll dice = roller.rollDice(1);
+		System.out.println(dice.getDice());
+		run+=genVenue(dice.getDice().get(0).getRolledValue());
+		DieRoll t = roller.rollDice(2);
+		run+=genEmployer((int)t.getNumberOfSuccesses() + t.getDice().get(0).getRolledValue());
 		dice=roller.rollDice(1);
-		System.out.println(dice[2]);
-		run+=genType(dice[2]);
+		System.out.println(dice.getDice().get(0).getRolledValue());
+		run+=genType(dice.getDice().get(0).getRolledValue());
 		dice=roller.rollDice(1);
-		System.out.println(dice[2]);
-		run+=genTarget(dice[2]);
+		System.out.println(dice.getDice().get(0).getRolledValue());
+		run+=genTarget(dice.getDice().get(0).getRolledValue());
 		dice=roller.rollDice(1);
-		System.out.println(dice[2]);
-		run+=genComplication(dice[2]);	
+		System.out.println(dice.getDice().get(0).getRolledValue());
+		run+=genComplication(dice.getDice().get(0).getRolledValue());
 		
 		return run;
 	}

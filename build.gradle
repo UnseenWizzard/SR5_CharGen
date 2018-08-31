@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'application'
+
+    id 'io.franzbecker.gradle-lombok' version '1.14'
 }
 
 repositories {
@@ -16,9 +18,16 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
+lombok {
+    version = '1.18.2'
+    sha256 = ""
+}
+
+mainClassName = 'io.github.unseenwizzard.sr5.chargen.gui.gui.MainFrame'
+
 jar {
     manifest {
-        attributes 'Main-Class': 'gui.MainFrame'
+        attributes 'Main-Class': mainClassName
     }
 
     from {
