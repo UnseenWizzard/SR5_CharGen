@@ -115,6 +115,7 @@ import javax.swing.text.DocumentFilter;
 
 import io.github.unseenwizzard.sr5chargen.data.character.*;
 import io.github.unseenwizzard.sr5chargen.data.character.Character;
+import io.github.unseenwizzard.sr5chargen.gui.listeners.*;
 import io.github.unseenwizzard.sr5chargen.utils.dice.Die;
 import io.github.unseenwizzard.sr5chargen.utils.dice.DieRoll;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -156,28 +157,39 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private int frameWidth = 900;
 	private int frameHeight = 600;
-	private Character currentCharacter;
-	private int charSpecialAttributes, initValueCharSpecialAttributes = -1;
-	private int charAttributes = -1;
-	private MagicResonancePriority[] charMagicResonance;
-	private int chosenMagResPriorityIndex = -1;
-	private int charSkills = -1;
-	private int charSkillGroups = -1;
-	private double charRessources = -1;
-	private int charKnowledgePoints, initValueCharKnowledgePoints = -1;
-	private int maxAttributeIndex = -1; // 0 bod, 1 agi, 2 rea, 3 str, 4 wil, 5
+	public Character currentCharacter;
+	public int charSpecialAttributes;
+	public int initValueCharSpecialAttributes = -1;
+	public int charAttributes = -1;
+	public MagicResonancePriority[] charMagicResonance;
+	public int chosenMagResPriorityIndex = -1;
+	public int charSkills = -1;
+	public int charSkillGroups = -1;
+	public double charRessources = -1;
+	public int charKnowledgePoints;
+	public int initValueCharKnowledgePoints = -1;
+	public int maxAttributeIndex = -1; // 0 bod, 1 agi, 2 rea, 3 str, 4 wil, 5
 										// log, 6 int, 7 cha
-	private JSpinner atr, spAtr;
-	private JButton typeA, typeB, typeC, typeD, typeE;
-	private JButton attrA, attrB, attrC, attrD, attrE;
-	private JButton magResA, magResB, magResC, magResD, magResE;
-	private JButton skillsA, skillsB, skillsC, skillsD, skillsE;
-	private JButton resA, resB, resC, resD, resE;
+										public JSpinner atr;
+	public JSpinner spAtr;
+	public JButton typeA, typeB, typeC, typeD, typeE;
+	public JButton attrA, attrB, attrC, attrD, attrE;
+	public JButton magResA, magResB, magResC, magResD, magResE;
+	public JButton skillsA, skillsB, skillsC, skillsD, skillsE;
+	public JButton resA, resB, resC, resD, resE;
 	// private JLabel SkillGroupInfo;
-	private boolean ALocked, BLocked, CLocked, DLocked, ELocked, typeLocked,
-			attrLocked, magResLocked, skillsLocked, resLocked = false;
-	private boolean saveAllowed=true;
-	private ListRoutine LR;
+	public boolean ALocked;
+	public boolean BLocked;
+	public boolean CLocked;
+	public boolean DLocked;
+	public boolean ELocked;
+	public boolean typeLocked;
+	public boolean attrLocked;
+	public boolean magResLocked;
+	public boolean skillsLocked;
+	public boolean resLocked = false;
+	public boolean saveAllowed=true;
+	public ListRoutine LR;
 	private JMenu advancement = null;
 	private JMenu help =null;
 
@@ -711,40 +723,40 @@ public class MainFrame extends JFrame {
 		revalidate();
 		repaint();
 
-		typeA.addActionListener(new typeListener(pType[0]));
-		typeB.addActionListener(new typeListener(pType[1]));
-		typeC.addActionListener(new typeListener(pType[2]));
-		typeD.addActionListener(new typeListener(pType[3]));
-		typeE.addActionListener(new typeListener(pType[4]));
+		typeA.addActionListener(new TypeListener(this, pType[0]));
+		typeB.addActionListener(new TypeListener(this, pType[1]));
+		typeC.addActionListener(new TypeListener(this, pType[2]));
+		typeD.addActionListener(new TypeListener(this, pType[3]));
+		typeE.addActionListener(new TypeListener(this, pType[4]));
 
-		attrA.addActionListener(new attrListener(AttributePriority[0]));
-		attrB.addActionListener(new attrListener(AttributePriority[1]));
-		attrC.addActionListener(new attrListener(AttributePriority[2]));
-		attrD.addActionListener(new attrListener(AttributePriority[3]));
-		attrE.addActionListener(new attrListener(AttributePriority[4]));
+		attrA.addActionListener(new AttrListener(this, AttributePriority[0]));
+		attrB.addActionListener(new AttrListener(this, AttributePriority[1]));
+		attrC.addActionListener(new AttrListener(this, AttributePriority[2]));
+		attrD.addActionListener(new AttrListener(this, AttributePriority[3]));
+		attrE.addActionListener(new AttrListener(this, AttributePriority[4]));
 
-		magResA.addActionListener(new magResListener(pMagicRes[0]));
-		magResB.addActionListener(new magResListener(pMagicRes[1]));
-		magResC.addActionListener(new magResListener(pMagicRes[2]));
-		magResD.addActionListener(new magResListener(pMagicRes[3]));
-		magResE.addActionListener(new magResListener(pMagicRes[4]));
+		magResA.addActionListener(new MagResListener(this, pMagicRes[0]));
+		magResB.addActionListener(new MagResListener(this, pMagicRes[1]));
+		magResC.addActionListener(new MagResListener(this, pMagicRes[2]));
+		magResD.addActionListener(new MagResListener(this, pMagicRes[3]));
+		magResE.addActionListener(new MagResListener(this, pMagicRes[4]));
 
-		skillsA.addActionListener(new skillListener(SkillPriority[0],
+		skillsA.addActionListener(new SkillListener(this, SkillPriority[0],
 				SkillGroupPriority[0]));
-		skillsB.addActionListener(new skillListener(SkillPriority[1],
+		skillsB.addActionListener(new SkillListener(this, SkillPriority[1],
 				SkillGroupPriority[1]));
-		skillsC.addActionListener(new skillListener(SkillPriority[2],
+		skillsC.addActionListener(new SkillListener(this, SkillPriority[2],
 				SkillGroupPriority[2]));
-		skillsD.addActionListener(new skillListener(SkillPriority[3],
+		skillsD.addActionListener(new SkillListener(this, SkillPriority[3],
 				SkillGroupPriority[3]));
-		skillsE.addActionListener(new skillListener(SkillPriority[4],
+		skillsE.addActionListener(new SkillListener(this, SkillPriority[4],
 				SkillGroupPriority[4]));
 
-		resA.addActionListener(new ressourceListener(RessourcesPriority[0]));
-		resB.addActionListener(new ressourceListener(RessourcesPriority[1]));
-		resC.addActionListener(new ressourceListener(RessourcesPriority[2]));
-		resD.addActionListener(new ressourceListener(RessourcesPriority[3]));
-		resE.addActionListener(new ressourceListener(RessourcesPriority[4]));
+		resA.addActionListener(new RessourceListener(this, RessourcesPriority[0]));
+		resB.addActionListener(new RessourceListener(this, RessourcesPriority[1]));
+		resC.addActionListener(new RessourceListener(this, RessourcesPriority[2]));
+		resD.addActionListener(new RessourceListener(this, RessourcesPriority[3]));
+		resE.addActionListener(new RessourceListener(this, RessourcesPriority[4]));
 	}
 
 	private void setAttributes() {
@@ -1252,17 +1264,17 @@ public class MainFrame extends JFrame {
 			}
 		});
 
-		spinnerBod.addChangeListener(new attrPointsChange());
-		spinnerAgi.addChangeListener(new attrPointsChange());
-		spinnerRea.addChangeListener(new attrPointsChange());
-		spinnerStr.addChangeListener(new attrPointsChange());
-		spinnerWil.addChangeListener(new attrPointsChange());
-		spinnerLog.addChangeListener(new attrPointsChange());
-		spinnerInt.addChangeListener(new attrPointsChange());
-		spinnerCha.addChangeListener(new attrPointsChange());
-		spinnerEdg.addChangeListener(new attrPointsChange());
-		spinnerMag.addChangeListener(new attrPointsChange());
-		spinnerRes.addChangeListener(new attrPointsChange());
+		spinnerBod.addChangeListener(new AttrPointsChange(this));
+		spinnerAgi.addChangeListener(new AttrPointsChange(this));
+		spinnerRea.addChangeListener(new AttrPointsChange(this));
+		spinnerStr.addChangeListener(new AttrPointsChange(this));
+		spinnerWil.addChangeListener(new AttrPointsChange(this));
+		spinnerLog.addChangeListener(new AttrPointsChange(this));
+		spinnerInt.addChangeListener(new AttrPointsChange(this));
+		spinnerCha.addChangeListener(new AttrPointsChange(this));
+		spinnerEdg.addChangeListener(new AttrPointsChange(this));
+		spinnerMag.addChangeListener(new AttrPointsChange(this));
+		spinnerRes.addChangeListener(new AttrPointsChange(this));
 
 		revalidate();
 		repaint();
@@ -2494,7 +2506,7 @@ public class MainFrame extends JFrame {
 
 	}
 
-	private int prevValues[];
+	public int[] prevValues;
 	SkillGroup tasking = null;
 
 	private void setSkillGroups() {
@@ -2559,7 +2571,7 @@ public class MainFrame extends JFrame {
 						skMax, 1));
 				groupSp.setName(sg.getName());
 				// TO DO: add Listener to spinner
-				groupSp.addChangeListener(new skillGroupChange());
+				groupSp.addChangeListener(new SkillGroupChange(this));
 				group.setName(sg.getName() + "Label");
 				panel.add(groupSp, constraints);
 				for (Skill s : sg.getSkills()) {
@@ -2631,7 +2643,7 @@ public class MainFrame extends JFrame {
 							0, skMax, 1));
 					groupSp.setName(sg.getName());
 					// TO DO: add Listener to spinner
-					groupSp.addChangeListener(new skillGroupChange());
+					groupSp.addChangeListener(new SkillGroupChange(this));
 					group.setName(group.getText() + "Label");
 					panel.add(groupSp, constraints);
 					for (Skill s : sg.getSkills()) {
@@ -2672,7 +2684,7 @@ public class MainFrame extends JFrame {
 						skMax, 1));
 				groupSp.setName(tasking.getName());
 				// TO DO: add Listener to spinner
-				groupSp.addChangeListener(new skillGroupChange());
+				groupSp.addChangeListener(new SkillGroupChange(this));
 				group.setName(group.getText() + "Label");
 				panel.add(groupSp, constraints);
 				for (Skill s : tasking.getSkills()) {
@@ -2714,7 +2726,7 @@ public class MainFrame extends JFrame {
 						prevValues[LR.getSkillGroupList().indexOf(sg)] = charMagicResonance[3].valueOfMagicSkillGroups;
 						groupSp.setName(sg.getName());
 
-						groupSp.addChangeListener(new skillGroupChange());
+						groupSp.addChangeListener(new SkillGroupChange(this));
 						group.setName(group.getText() + "Label");
 
 						panel.add(groupSp, constraints);
@@ -3088,7 +3100,7 @@ public class MainFrame extends JFrame {
 					skillSp = new JSpinner(new SpinnerNumberModel(0, 0, skMax,
 							1));
 				}
-				skillSp.addChangeListener(new skillChange());
+				skillSp.addChangeListener(new SkillChange(this));
 				skillSp.setName(s.getName());
 				panel.add(skillSp, constraints);
 				constraints.gridy += 1;
@@ -3242,7 +3254,7 @@ public class MainFrame extends JFrame {
 					currentCharacter.removeSkill(currentCharacter.getSkills()
 							.get(currentCharacter.getSkills().indexOf(s)));
 				} 
-				skillSp.addChangeListener(new knowledgeSkillChange());
+				skillSp.addChangeListener(new KnowledgeSkillChange(this));
 				skillSp.setName(s.getName());
 				panel.add(skillSp, constraints);
 				constraints.gridy += 1;
@@ -3528,7 +3540,7 @@ public class MainFrame extends JFrame {
 						skillSp = new JSpinner(new SpinnerNumberModel(0, 0,
 								skMax, 1));
 					}
-					skillSp.addChangeListener(new skillChange());
+					skillSp.addChangeListener(new SkillChange(this));
 					skillSp.setName(s.getName());
 					panel.add(skillSp, constraints);
 					constraints.gridy += 1;
@@ -3574,7 +3586,7 @@ public class MainFrame extends JFrame {
 								skMax, 1));
 					}
 					skillSp.setName(s.getName());
-					skillSp.addChangeListener(new skillChange());
+					skillSp.addChangeListener(new SkillChange(this));
 					panel.add(skillSp, constraints);
 					constraints.gridy += 1;
 					constraints.gridx -= 1;
@@ -3655,7 +3667,7 @@ public class MainFrame extends JFrame {
 		repaint();
 	}
 
-	int prevValue = -1;
+	public int prevValue = -1;
 
 	private void chooseGear() {
 		final JPanel panel = (JPanel) this.getContentPane().getComponent(0);
@@ -3751,7 +3763,7 @@ public class MainFrame extends JFrame {
 		});
 
 		prevValue = (int) karma.getValue();
-		karma.addChangeListener(new karmaToMoney(money));
+		karma.addChangeListener(new KarmaToMoney(this, money));
 
 		mWp.addActionListener(new ActionListener() {
 
@@ -3827,36 +3839,7 @@ public class MainFrame extends JFrame {
 	private int freeSpells = 0;
 	private int freeContPoints = 0;
 
-	class doneAction implements ActionListener{
-		private JPanel contentPanel=null;
-		public doneAction(JPanel panel){
-			this.contentPanel=panel;
-		}
-		
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			if (
-					JOptionPane.showConfirmDialog(
-							contentPanel,
-							new JComponent[]{
-									new JLabel("You can save your character now."),
-									new JLabel("Nevertheless, you can only carry up to 7 Karma out of character generation, and any free contacts, spells or anything else you'd get at generation will be lost."),
-									new JLabel("Are you sure you're done?")
-							},
-							"Really done?",
-							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)
-							==JOptionPane.YES_OPTION)
-			{
-				if (currentCharacter.getPersonalData().getKarma()>7)
-					currentCharacter.getPersonalData().setKarma(7);
-				saveAllowed=true;
-				MainFrame.this.saveCharacter();
-				MainFrame.this.characterDisplay(false);
-			}
-		}
-	}
-	
-	private JPanel characterDisplay(final boolean characterGeneration) {
+	public JPanel characterDisplay(final boolean characterGeneration) {
 		final int skMax;
 		
 		final JPanel panel = new JPanel();
@@ -3866,7 +3849,7 @@ public class MainFrame extends JFrame {
 		final JPanel infoPanel = new JPanel(new BorderLayout());
 		
 		final JButton done = new JButton("Done");
-		done.addActionListener(new doneAction(contentPanel));
+		done.addActionListener(new DoneAction(this, contentPanel));
 		if (characterGeneration) {
 			
 			if (currentCharacter.getQualities().contains(
@@ -4993,7 +4976,7 @@ public class MainFrame extends JFrame {
 							.getValue(), sg.getValue(), skMax, 1));
 					groupSp.setName(sg.getName());
 
-					groupSp.addChangeListener(new skillGroupKarmaRaise(karma,
+					groupSp.addChangeListener(new SkillGroupKarmaRaise(MainFrame.this, karma,
 							skMax));
 					group.setName(sg.getName() + "Label");
 					panel.add(groupSp, constraints);
@@ -5101,7 +5084,7 @@ public class MainFrame extends JFrame {
 						skillSp = new JSpinner(new SpinnerNumberModel(s
 								.getValue(), s.getValue(), skMax, 1));
 					}
-					skillSp.addChangeListener(new skillKarmaRaise(karma, skMax));
+					skillSp.addChangeListener(new SkillKarmaRaise(MainFrame.this, karma, skMax));
 					skillSp.setName(s.getName());
 					panel.add(skillSp, constraints);
 
@@ -5143,7 +5126,7 @@ public class MainFrame extends JFrame {
 						skillSp = new JSpinner(new SpinnerNumberModel(s
 								.getValue(), s.getValue(), skMax, 1));
 					}
-					skillSp.addChangeListener(new skillKarmaRaise(karma, skMax));
+					skillSp.addChangeListener(new SkillKarmaRaise(MainFrame.this, karma, skMax));
 					skillSp.setName(s.getName());
 					panel.add(skillSp, constraints);
 
@@ -10963,1548 +10946,7 @@ public class MainFrame extends JFrame {
 		revalidate();
 	}
 
-	private class karmaToMoney implements ChangeListener {
-		JSpinner money = null;
-
-		public karmaToMoney(JSpinner money) {
-			this.money = money;
-		}
-
-		@Override
-		public void stateChanged(ChangeEvent arg0) {
-			if ((int) ((JSpinner) arg0.getSource()).getValue() < prevValue) {
-				money.getModel().setValue(
-						(double) money.getModel().getValue() + 2000);
-
-			} else {
-				money.getModel().setValue(
-						(double) money.getModel().getValue() - 2000);
-			}
-			prevValue = (int) ((JSpinner) arg0.getSource()).getValue();
-			money.revalidate();money.repaint();
-			((JSpinner) arg0.getSource()).revalidate();((JSpinner) arg0.getSource()).repaint();
-		}
-	}
-
-	private class skillKarmaRaise implements ChangeListener {
-
-		JSpinner karma = null;
-		int skMax = 0;
-
-		public skillKarmaRaise(JSpinner karma, int skMax) {
-			this.karma = karma;
-			this.skMax = skMax;
-		}
-
-		@Override
-		public void stateChanged(ChangeEvent arg0) {
-			JSpinner sp = (JSpinner) arg0.getSource();
-			int raise = (int) sp.getValue();
-			Skill skill = null;
-			for (Skill s : currentCharacter.getSkills()) {
-				if (s.getName().equals(sp.getName())) {
-					skill = s;
-					if (s.isKnowledge()) {
-						raise /= 2;
-					}
-					break;
-				}
-			}
-			if (currentCharacter.getPersonalData().getKarma() >= raise * 2) {
-				skill.setValue((int) sp.getValue());
-				sp.setModel(new SpinnerNumberModel(skill.getValue(), skill
-						.getValue(), skMax, 1));
-				currentCharacter.getPersonalData().setKarma(
-						currentCharacter.getPersonalData().getKarma() - raise
-								* 2);
-				karma.setValue(currentCharacter.getPersonalData().getKarma());
-
-			} else {
-				sp.removeChangeListener(this);
-				sp.setValue(skill.getValue());
-				sp.addChangeListener(this);
-				JOptionPane.showMessageDialog(sp.getParent(),
-						"Not enough Karma to raise Skill!");
-			}
-
-			sp.revalidate();
-			sp.repaint();
-			karma.revalidate();
-			karma.repaint();
-		}
-
-	}
-
-	private class skillGroupKarmaRaise implements ChangeListener {
-
-		JSpinner karma = null;
-		int skMax = 0;
-
-		public skillGroupKarmaRaise(JSpinner karma, int skMax) {
-			this.karma = karma;
-			this.skMax = skMax;
-		}
-
-		@Override
-		public void stateChanged(ChangeEvent arg0) {
-			JSpinner top = (JSpinner) arg0.getSource();
-			SkillGroup sg = null;
-			for (SkillGroup s : currentCharacter.getSkillGroups()) {
-				if (s.getName().equals(top.getName())) {
-					sg = s;
-				}
-			}
-			if (currentCharacter.getPersonalData().getKarma() >= (int) top
-					.getValue() * 5) {
-				sg.setValue((int) top.getValue());
-				top.setModel(new SpinnerNumberModel(sg.getValue(), sg
-						.getValue(), skMax, 1));
-				currentCharacter.getPersonalData().setKarma(
-						currentCharacter.getPersonalData().getKarma()
-								- (int) top.getValue() * 5);
-				karma.setValue(currentCharacter.getPersonalData().getKarma());
-				for (java.awt.Component sp : top.getParent().getComponents()) {
-					if (sp.getName() != null
-							&& sp.getName().equals(top.getName() + "Skill")) {
-						((JSpinner) sp).setValue(top.getValue());
-						sp.revalidate();
-						sp.repaint();
-					}
-				}
-			} else {
-				JOptionPane.showMessageDialog(top.getParent(),
-						"Not enough Karma to raise Skill!", "Error",
-						JOptionPane.ERROR_MESSAGE);
-				top.removeChangeListener(this);
-				top.setValue(sg.getValue());
-				top.addChangeListener(this);
-			}
-			top.revalidate();
-			top.repaint();
-			karma.revalidate();
-			karma.repaint();
-		}
-
-	}
-
-	private class knowledgeSkillChange implements ChangeListener {
-
-		@Override
-		public void stateChanged(ChangeEvent arg0) {
-			JSpinner top = (JSpinner) arg0.getSource();
-			int index = 0;
-			for (Skill s : LR.getSkillList()) {
-				if (s.getName().equals(top.getName())) {
-					index = LR.getSkillList().indexOf(s);
-				}
-			}
-
-			if ((int) top.getValue() < prevValues[index]
-					&& charKnowledgePoints < initValueCharKnowledgePoints) {
-				charKnowledgePoints += prevValues[index] - (int) top.getValue();
-				prevValues[index] = (int) top.getValue();
-				spAtr.setValue(charKnowledgePoints);
-			} else {
-				if (charKnowledgePoints > 0
-						&& (charKnowledgePoints < initValueCharKnowledgePoints || ((int) top
-								.getValue() > prevValues[index]))) {
-					charKnowledgePoints += prevValues[index]
-							- (int) top.getValue();
-					prevValues[index] = (int) top.getValue();
-					spAtr.setValue(charKnowledgePoints);
-				} else if (charSkills > 0
-						|| ((int) top.getValue() < prevValues[index])) {
-					charSkills += prevValues[index] - (int) top.getValue();
-					prevValues[index] = (int) top.getValue();
-					atr.setValue(charSkills);
-				} else {
-					JOptionPane.showMessageDialog(
-							((JSpinner) arg0.getSource()).getParent(),
-							"You have no more skill points left!", "Error",
-							JOptionPane.ERROR_MESSAGE);
-					top.removeChangeListener(this);
-					top.setValue(top.getPreviousValue());
-					top.addChangeListener(this);
-					top.revalidate();
-					top.repaint();
-				}
-			}
-		}
-	}
-
-	private class skillChange implements ChangeListener {
-
-		@Override
-		public void stateChanged(ChangeEvent arg0) {
-			JSpinner top = (JSpinner) arg0.getSource();
-			int index = 0;
-			for (Skill s : LR.getSkillList()) {
-				if (s.getName().equals(top.getName())) {
-					index = LR.getSkillList().indexOf(s);
-				}
-			}
-			if (charSkills > 0 || (int) top.getValue() < prevValues[index]) {
-				charSkills += prevValues[index] - (int) top.getValue();
-				prevValues[index] = (int) top.getValue();
-				atr.setValue(charSkills);
-			} else {
-				JOptionPane.showMessageDialog(
-						((JSpinner) arg0.getSource()).getParent(),
-						"You have no more skill points left!", "Error",
-						JOptionPane.ERROR_MESSAGE);
-				top.removeChangeListener(this);
-				top.setValue(top.getPreviousValue());
-				top.addChangeListener(this);
-				top.revalidate();
-				top.repaint();
-			}
-		}
-	}
-
-	private class skillGroupChange implements ChangeListener {
-
-		@Override
-		public void stateChanged(ChangeEvent arg0) {
-			JSpinner top = (JSpinner) arg0.getSource();
-			int index = 0;
-			for (SkillGroup sg : LR.getSkillGroupList()) {
-				if (sg.getName().equals(top.getName())) {
-					index = LR.getSkillGroupList().indexOf(sg);
-				}
-			}
-			if (charSkillGroups > 0 || (int) top.getValue() < prevValues[index]) {
-				charSkillGroups += prevValues[index] - (int) top.getValue();
-				prevValues[index] = (int) top.getValue();
-				atr.setValue(charSkillGroups);
-				for (java.awt.Component sp : top.getParent().getComponents()) {
-					if (sp.getName() != null
-							&& sp.getName().equals(top.getName() + "Skill")) {
-						((JSpinner) sp).setValue(top.getValue());
-						sp.revalidate();
-						sp.repaint();
-					}
-				}
-			} else {
-				JOptionPane.showMessageDialog(
-						((JSpinner) arg0.getSource()).getParent(),
-						"You have no more skillgroup points left!", "Error",
-						JOptionPane.ERROR_MESSAGE);
-				top.removeChangeListener(this);
-				top.setValue(top.getPreviousValue());
-				top.addChangeListener(this);
-				top.revalidate();
-				top.repaint();
-			}
-		}
-	}
-
-	private class attrPointsChange implements ChangeListener {
-
-		@Override
-		public void stateChanged(ChangeEvent e) {
-			JSpinner sp = (JSpinner) e.getSource();
-			JPanel panel = (JPanel) sp.getParent();
-			if (sp.getName() == "bod") {
-				if ((int) sp.getValue() == currentCharacter.getAttributes()
-						.getMAXbody()) {
-					if (maxAttributeIndex == -1) {
-						maxAttributeIndex = 0;
-						charAttributes += currentCharacter.getAttributes()
-								.getBody() - (int) sp.getValue();
-						currentCharacter.getAttributes().setBody(
-								(int) sp.getValue());
-					} else {
-						JOptionPane
-								.showMessageDialog(
-										panel,
-										"Only one attribute can be raised to it's natural maximum during character generation!",
-										"Error", JOptionPane.ERROR_MESSAGE);
-						sp.setValue(sp.getPreviousValue());
-					}
-				} else {
-					if (maxAttributeIndex == 0) {
-						charAttributes += currentCharacter.getAttributes()
-								.getBody() - (int) sp.getValue();
-						currentCharacter.getAttributes().setBody(
-								(int) sp.getValue());
-						maxAttributeIndex = -1;
-					} else {
-						charAttributes += currentCharacter.getAttributes()
-								.getBody() - (int) sp.getValue();
-						currentCharacter.getAttributes().setBody(
-								(int) sp.getValue());
-					}
-				}
-			} else if (sp.getName() == "agi") {
-				if ((int) sp.getValue() == currentCharacter.getAttributes()
-						.getMAXagility()) {
-					if (maxAttributeIndex == -1) {
-						maxAttributeIndex = 1;
-						charAttributes += currentCharacter.getAttributes()
-								.getAgility() - (int) sp.getValue();
-						currentCharacter.getAttributes().setAgility(
-								(int) sp.getValue());
-					} else {
-						JOptionPane
-								.showMessageDialog(
-										panel,
-										"Only one attribute can be raised to it's natural maximum during character generation!",
-										"Error", JOptionPane.ERROR_MESSAGE);
-						sp.setValue(sp.getPreviousValue());
-					}
-				} else {
-					if (maxAttributeIndex == 1) {
-						charAttributes += currentCharacter.getAttributes()
-								.getAgility() - (int) sp.getValue();
-						currentCharacter.getAttributes().setAgility(
-								(int) sp.getValue());
-						maxAttributeIndex = -1;
-					} else {
-						charAttributes += currentCharacter.getAttributes()
-								.getAgility() - (int) sp.getValue();
-						currentCharacter.getAttributes().setAgility(
-								(int) sp.getValue());
-					}
-				}
-			} else if (sp.getName() == "rea") {
-				if ((int) sp.getValue() == currentCharacter.getAttributes()
-						.getMAXreaction()) {
-					if (maxAttributeIndex == -1) {
-						maxAttributeIndex = 2;
-						charAttributes += currentCharacter.getAttributes()
-								.getReaction() - (int) sp.getValue();
-						currentCharacter.getAttributes().setReaction(
-								(int) sp.getValue());
-					} else {
-						JOptionPane
-								.showMessageDialog(
-										panel,
-										"Only one attribute can be raised to it's natural maximum during character generation!",
-										"Error", JOptionPane.ERROR_MESSAGE);
-						sp.setValue(sp.getPreviousValue());
-					}
-				} else {
-					if (maxAttributeIndex == 2) {
-						charAttributes += currentCharacter.getAttributes()
-								.getReaction() - (int) sp.getValue();
-						currentCharacter.getAttributes().setReaction(
-								(int) sp.getValue());
-						maxAttributeIndex = -1;
-					} else {
-						charAttributes += currentCharacter.getAttributes()
-								.getReaction() - (int) sp.getValue();
-						currentCharacter.getAttributes().setReaction(
-								(int) sp.getValue());
-					}
-				}
-			} else if (sp.getName() == "str") {
-				if ((int) sp.getValue() == currentCharacter.getAttributes()
-						.getMAXstrength()) {
-					if (maxAttributeIndex == -1) {
-						maxAttributeIndex = 3;
-						charAttributes += currentCharacter.getAttributes()
-								.getStrength() - (int) sp.getValue();
-						currentCharacter.getAttributes().setStrength(
-								(int) sp.getValue());
-					} else {
-						JOptionPane
-								.showMessageDialog(
-										panel,
-										"Only one attribute can be raised to it's natural maximum during character generation!",
-										"Error", JOptionPane.ERROR_MESSAGE);
-						sp.setValue(sp.getPreviousValue());
-					}
-				} else {
-					if (maxAttributeIndex == 3) {
-						charAttributes += currentCharacter.getAttributes()
-								.getStrength() - (int) sp.getValue();
-						currentCharacter.getAttributes().setStrength(
-								(int) sp.getValue());
-						maxAttributeIndex = -1;
-					} else {
-						charAttributes += currentCharacter.getAttributes()
-								.getStrength() - (int) sp.getValue();
-						currentCharacter.getAttributes().setStrength(
-								(int) sp.getValue());
-					}
-				}
-			} else if (sp.getName() == "wil") {
-				if ((int) sp.getValue() == currentCharacter.getAttributes()
-						.getMAXwillpower()) {
-					if (maxAttributeIndex == -1) {
-						maxAttributeIndex = 4;
-						charAttributes += currentCharacter.getAttributes()
-								.getWillpower() - (int) sp.getValue();
-						currentCharacter.getAttributes().setWillpower(
-								(int) sp.getValue());
-					} else {
-						JOptionPane
-								.showMessageDialog(
-										panel,
-										"Only one attribute can be raised to it's natural maximum during character generation!",
-										"Error", JOptionPane.ERROR_MESSAGE);
-						sp.setValue(sp.getPreviousValue());
-					}
-				} else {
-					if (maxAttributeIndex == 4) {
-						charAttributes += currentCharacter.getAttributes()
-								.getWillpower() - (int) sp.getValue();
-						currentCharacter.getAttributes().setWillpower(
-								(int) sp.getValue());
-						maxAttributeIndex = -1;
-					} else {
-						charAttributes += currentCharacter.getAttributes()
-								.getWillpower() - (int) sp.getValue();
-						currentCharacter.getAttributes().setWillpower(
-								(int) sp.getValue());
-					}
-				}
-			} else if (sp.getName() == "log") {
-				if ((int) sp.getValue() == currentCharacter.getAttributes()
-						.getMAXintuition()) {
-					if (maxAttributeIndex == -1) {
-						maxAttributeIndex = 5;
-						charAttributes += currentCharacter.getAttributes()
-								.getLogic() - (int) sp.getValue();
-						currentCharacter.getAttributes().setLogic(
-								(int) sp.getValue());
-					} else {
-						JOptionPane
-								.showMessageDialog(
-										panel,
-										"Only one attribute can be raised to it's natural maximum during character generation!",
-										"Error", JOptionPane.ERROR_MESSAGE);
-						sp.setValue(sp.getPreviousValue());
-					}
-				} else {
-					if (maxAttributeIndex == 5) {
-						charAttributes += currentCharacter.getAttributes()
-								.getLogic() - (int) sp.getValue();
-						currentCharacter.getAttributes().setLogic(
-								(int) sp.getValue());
-						maxAttributeIndex = -1;
-					} else {
-						charAttributes += currentCharacter.getAttributes()
-								.getLogic() - (int) sp.getValue();
-						currentCharacter.getAttributes().setLogic(
-								(int) sp.getValue());
-					}
-				}
-			} else if (sp.getName() == "int") {
-				if ((int) sp.getValue() == currentCharacter.getAttributes()
-						.getMAXintuition()) {
-					if (maxAttributeIndex == -1) {
-						maxAttributeIndex = 6;
-						charAttributes += currentCharacter.getAttributes()
-								.getIntuition() - (int) sp.getValue();
-						currentCharacter.getAttributes().setIntuition(
-								(int) sp.getValue());
-					} else {
-						JOptionPane
-								.showMessageDialog(
-										panel,
-										"Only one attribute can be raised to it's natural maximum during character generation!",
-										"Error", JOptionPane.ERROR_MESSAGE);
-						sp.setValue(sp.getPreviousValue());
-					}
-				} else {
-					if (maxAttributeIndex == 6) {
-						charAttributes += currentCharacter.getAttributes()
-								.getIntuition() - (int) sp.getValue();
-						currentCharacter.getAttributes().setIntuition(
-								(int) sp.getValue());
-						maxAttributeIndex = -1;
-					} else {
-						charAttributes += currentCharacter.getAttributes()
-								.getIntuition() - (int) sp.getValue();
-						currentCharacter.getAttributes().setIntuition(
-								(int) sp.getValue());
-					}
-				}
-			} else if (sp.getName() == "cha") {
-				if ((int) sp.getValue() == currentCharacter.getAttributes()
-						.getMAXcharisma()) {
-					if (maxAttributeIndex == -1) {
-						maxAttributeIndex = 7;
-						charAttributes += currentCharacter.getAttributes()
-								.getCharisma() - (int) sp.getValue();
-						currentCharacter.getAttributes().setCharisma(
-								(int) sp.getValue());
-					} else {
-						JOptionPane
-								.showMessageDialog(
-										panel,
-										"Only one attribute can be raised to it's natural maximum during character generation!",
-										"Error", JOptionPane.ERROR_MESSAGE);
-						sp.setValue(sp.getPreviousValue());
-					}
-				} else {
-					if (maxAttributeIndex == 7) {
-						charAttributes += currentCharacter.getAttributes()
-								.getCharisma() - (int) sp.getValue();
-						currentCharacter.getAttributes().setCharisma(
-								(int) sp.getValue());
-						maxAttributeIndex = -1;
-					} else {
-						charAttributes += currentCharacter.getAttributes()
-								.getCharisma() - (int) sp.getValue();
-						currentCharacter.getAttributes().setCharisma(
-								(int) sp.getValue());
-					}
-				}
-			} else if (sp.getName() == "edg") {
-				if ((int) sp.getValue() < currentCharacter.getAttributes()
-						.getEdge()
-						&& charSpecialAttributes < initValueCharSpecialAttributes) {
-					charSpecialAttributes += currentCharacter.getAttributes()
-							.getEdge() - (int) sp.getValue();
-					currentCharacter.getAttributes().setEdge(
-							(int) sp.getValue());
-				} else {
-					if (charSpecialAttributes > 0
-							&& (charSpecialAttributes < initValueCharSpecialAttributes || ((int) sp
-									.getValue() > currentCharacter
-									.getAttributes().getEdge()))) {
-						charSpecialAttributes += currentCharacter
-								.getAttributes().getEdge()
-								- (int) sp.getValue();
-						currentCharacter.getAttributes().setEdge(
-								(int) sp.getValue());
-					} else {
-						charAttributes += currentCharacter.getAttributes()
-								.getEdge() - (int) sp.getValue();
-						currentCharacter.getAttributes().setEdge(
-								(int) sp.getValue());
-					}
-				}
-			} else if (sp.getName() == "mag") {
-				if ((int) sp.getValue() < currentCharacter.getAttributes()
-						.getMagic()
-						&& charSpecialAttributes < initValueCharSpecialAttributes) {
-					charSpecialAttributes += currentCharacter.getAttributes()
-							.getMagic() - (int) sp.getValue();
-					currentCharacter.getAttributes().setMagic(
-							(int) sp.getValue());
-				} else {
-					if (charSpecialAttributes > 0
-							&& (charSpecialAttributes < initValueCharSpecialAttributes || ((int) sp
-									.getValue() > currentCharacter
-									.getAttributes().getMagic()))) {
-						charSpecialAttributes += currentCharacter
-								.getAttributes().getMagic()
-								- (int) sp.getValue();
-						currentCharacter.getAttributes().setMagic(
-								(int) sp.getValue());
-					} else {
-						charAttributes += currentCharacter.getAttributes()
-								.getMagic() - (int) sp.getValue();
-						currentCharacter.getAttributes().setMagic(
-								(int) sp.getValue());
-					}
-				}
-			} else if (sp.getName() == "res") {
-				if ((int) sp.getValue() < currentCharacter.getAttributes()
-						.getResonance()
-						&& charSpecialAttributes < initValueCharSpecialAttributes) {
-					charSpecialAttributes += currentCharacter.getAttributes()
-							.getResonance() - (int) sp.getValue();
-					currentCharacter.getAttributes().setResonance(
-							(int) sp.getValue());
-				} else {
-					if (charSpecialAttributes > 0
-							&& (charSpecialAttributes < initValueCharSpecialAttributes || ((int) sp
-									.getValue() > currentCharacter
-									.getAttributes().getResonance()))) {
-						charSpecialAttributes += currentCharacter
-								.getAttributes().getResonance()
-								- (int) sp.getValue();
-						currentCharacter.getAttributes().setResonance(
-								(int) sp.getValue());
-					} else {
-						charAttributes += currentCharacter.getAttributes()
-								.getResonance() - (int) sp.getValue();
-						currentCharacter.getAttributes().setResonance(
-								(int) sp.getValue());
-					}
-				}
-			}
-			atr.setValue(charAttributes);
-			spAtr.setValue(charSpecialAttributes);
-		}
-
-	}
-
-	private class typeListener implements ActionListener {
-		TypePriority tP;
-
-		private typeListener(TypePriority tP) {
-			this.tP = tP;
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (charSpecialAttributes == -1) {
-				for (int i = 0; i < tP.type.length; i++) {
-					if (tP.type[i] == currentCharacter.getPersonalData()
-							.getMetatype()) {
-						charSpecialAttributes = tP.specialAttributes[i];
-						initValueCharSpecialAttributes = charSpecialAttributes;
-					}
-				}
-				if (charSpecialAttributes == -1) {
-					JOptionPane
-							.showMessageDialog(
-									((JButton) e.getSource()).getParent(),
-									"Your choice is not fitting to your chosen metatype!",
-									"Error", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-				typeLocked = true;
-				if ((JButton) e.getSource() == typeA) {
-					ALocked = true;
-
-					attrA.setEnabled(false);
-					magResA.setEnabled(false);
-					skillsA.setEnabled(false);
-					resA.setEnabled(false);
-
-					typeB.setEnabled(false);
-					typeC.setEnabled(false);
-					typeD.setEnabled(false);
-					typeE.setEnabled(false);
-				} else if ((JButton) e.getSource() == typeB) {
-					BLocked = true;
-
-					attrB.setEnabled(false);
-					magResB.setEnabled(false);
-					skillsB.setEnabled(false);
-					resB.setEnabled(false);
-
-					typeA.setEnabled(false);
-					typeC.setEnabled(false);
-					typeD.setEnabled(false);
-					typeE.setEnabled(false);
-				} else if ((JButton) e.getSource() == typeC) {
-					CLocked = true;
-
-					attrC.setEnabled(false);
-					magResC.setEnabled(false);
-					skillsC.setEnabled(false);
-					resC.setEnabled(false);
-
-					typeB.setEnabled(false);
-					typeA.setEnabled(false);
-					typeD.setEnabled(false);
-					typeE.setEnabled(false);
-				} else if ((JButton) e.getSource() == typeD) {
-					DLocked = true;
-
-					attrD.setEnabled(false);
-					magResD.setEnabled(false);
-					skillsD.setEnabled(false);
-					resD.setEnabled(false);
-
-					typeB.setEnabled(false);
-					typeC.setEnabled(false);
-					typeA.setEnabled(false);
-					typeE.setEnabled(false);
-				} else if ((JButton) e.getSource() == typeE) {
-					ELocked = true;
-
-					attrE.setEnabled(false);
-					magResE.setEnabled(false);
-					skillsE.setEnabled(false);
-					resE.setEnabled(false);
-
-					typeB.setEnabled(false);
-					typeC.setEnabled(false);
-					typeD.setEnabled(false);
-					typeA.setEnabled(false);
-				}
-			} else {
-				charSpecialAttributes = -1;
-				initValueCharSpecialAttributes = -1;
-				typeLocked = false;
-
-				if ((JButton) e.getSource() == typeA) {
-					ALocked = false;
-
-					if (!attrLocked)
-						attrA.setEnabled(true);
-					if (!magResLocked)
-						magResA.setEnabled(true);
-					if (!skillsLocked)
-						skillsA.setEnabled(true);
-					if (!resLocked)
-						resA.setEnabled(true);
-
-					if (!BLocked)
-						typeB.setEnabled(true);
-					if (!CLocked)
-						typeC.setEnabled(true);
-					if (!DLocked)
-						typeD.setEnabled(true);
-					if (!ELocked)
-						typeE.setEnabled(true);
-				} else if ((JButton) e.getSource() == typeB) {
-					BLocked = false;
-
-					if (!attrLocked)
-						attrB.setEnabled(true);
-					if (!magResLocked)
-						magResB.setEnabled(true);
-					if (!skillsLocked)
-						skillsB.setEnabled(true);
-					if (!resLocked)
-						resB.setEnabled(true);
-
-					if (!ALocked)
-						typeA.setEnabled(true);
-					if (!CLocked)
-						typeC.setEnabled(true);
-					if (!DLocked)
-						typeD.setEnabled(true);
-					if (!ELocked)
-						typeE.setEnabled(true);
-				} else if ((JButton) e.getSource() == typeC) {
-					CLocked = false;
-
-					if (!attrLocked)
-						attrC.setEnabled(true);
-					if (!magResLocked)
-						magResC.setEnabled(true);
-					if (!skillsLocked)
-						skillsC.setEnabled(true);
-					if (!resLocked)
-						resC.setEnabled(true);
-
-					if (!BLocked)
-						typeB.setEnabled(true);
-					if (!ALocked)
-						typeA.setEnabled(true);
-					if (!DLocked)
-						typeD.setEnabled(true);
-					if (!ELocked)
-						typeE.setEnabled(true);
-				} else if ((JButton) e.getSource() == typeD) {
-					DLocked = false;
-
-					if (!attrLocked)
-						attrD.setEnabled(true);
-					if (!magResLocked)
-						magResD.setEnabled(true);
-					if (!skillsLocked)
-						skillsD.setEnabled(true);
-					if (!resLocked)
-						resD.setEnabled(true);
-
-					if (!BLocked)
-						typeB.setEnabled(true);
-					if (!ALocked)
-						typeA.setEnabled(true);
-					if (!CLocked)
-						typeC.setEnabled(true);
-					if (!ELocked)
-						typeE.setEnabled(true);
-				} else if ((JButton) e.getSource() == typeE) {
-					ELocked = false;
-
-					if (!attrLocked)
-						attrE.setEnabled(true);
-					if (!magResLocked)
-						magResE.setEnabled(true);
-					if (!skillsLocked)
-						skillsE.setEnabled(true);
-					if (!resLocked)
-						resE.setEnabled(true);
-
-					if (!BLocked)
-						typeB.setEnabled(true);
-					if (!ALocked)
-						typeA.setEnabled(true);
-					if (!CLocked)
-						typeC.setEnabled(true);
-					if (!DLocked)
-						typeD.setEnabled(true);
-				}
-			}
-		}
-	}
-
-	private class attrListener implements ActionListener {
-		int attr;
-
-		private attrListener(int attr) {
-			this.attr = attr;
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (charAttributes == -1) {
-				System.out.println("Clicked, attributes not set");
-				charAttributes = attr;
-				attrLocked = true;
-				if ((JButton) e.getSource() == attrA) {
-					ALocked = true;
-
-					typeA.setEnabled(false);
-					magResA.setEnabled(false);
-					skillsA.setEnabled(false);
-					resA.setEnabled(false);
-
-					attrB.setEnabled(false);
-					attrC.setEnabled(false);
-					attrD.setEnabled(false);
-					attrE.setEnabled(false);
-				} else if ((JButton) e.getSource() == attrB) {
-					BLocked = true;
-
-					typeB.setEnabled(false);
-					magResB.setEnabled(false);
-					skillsB.setEnabled(false);
-					resB.setEnabled(false);
-
-					attrA.setEnabled(false);
-					attrC.setEnabled(false);
-					attrD.setEnabled(false);
-					attrE.setEnabled(false);
-				} else if ((JButton) e.getSource() == attrC) {
-					CLocked = true;
-
-					typeC.setEnabled(false);
-					magResC.setEnabled(false);
-					skillsC.setEnabled(false);
-					resC.setEnabled(false);
-
-					attrB.setEnabled(false);
-					attrA.setEnabled(false);
-					attrD.setEnabled(false);
-					attrE.setEnabled(false);
-				} else if ((JButton) e.getSource() == attrD) {
-					DLocked = true;
-
-					typeD.setEnabled(false);
-					magResD.setEnabled(false);
-					skillsD.setEnabled(false);
-					resD.setEnabled(false);
-
-					attrB.setEnabled(false);
-					attrC.setEnabled(false);
-					attrA.setEnabled(false);
-					attrE.setEnabled(false);
-				} else if ((JButton) e.getSource() == attrE) {
-					ELocked = true;
-
-					typeE.setEnabled(false);
-					magResE.setEnabled(false);
-					skillsE.setEnabled(false);
-					resE.setEnabled(false);
-
-					attrB.setEnabled(false);
-					attrC.setEnabled(false);
-					attrD.setEnabled(false);
-					attrA.setEnabled(false);
-				}
-			} else {
-				charAttributes = -1;
-				attrLocked = false;
-
-				if ((JButton) e.getSource() == attrA) {
-					ALocked = false;
-
-					if (!typeLocked)
-						typeA.setEnabled(true);
-					if (!magResLocked)
-						magResA.setEnabled(true);
-					if (!skillsLocked)
-						skillsA.setEnabled(true);
-					if (!resLocked)
-						resA.setEnabled(true);
-
-					if (!BLocked)
-						attrB.setEnabled(true);
-					if (!CLocked)
-						attrC.setEnabled(true);
-					if (!DLocked)
-						attrD.setEnabled(true);
-					if (!ELocked)
-						attrE.setEnabled(true);
-				} else if ((JButton) e.getSource() == attrB) {
-					BLocked = false;
-
-					if (!typeLocked)
-						typeB.setEnabled(true);
-					if (!magResLocked)
-						magResB.setEnabled(true);
-					if (!skillsLocked)
-						skillsB.setEnabled(true);
-					if (!resLocked)
-						resB.setEnabled(true);
-
-					if (!ALocked)
-						attrA.setEnabled(true);
-					if (!CLocked)
-						attrC.setEnabled(true);
-					if (!DLocked)
-						attrD.setEnabled(true);
-					if (!ELocked)
-						attrE.setEnabled(true);
-				} else if ((JButton) e.getSource() == attrC) {
-					CLocked = false;
-
-					if (!typeLocked)
-						typeC.setEnabled(true);
-					if (!magResLocked)
-						magResC.setEnabled(true);
-					if (!skillsLocked)
-						skillsC.setEnabled(true);
-					if (!resLocked)
-						resC.setEnabled(true);
-
-					if (!BLocked)
-						attrB.setEnabled(true);
-					if (!ALocked)
-						attrA.setEnabled(true);
-					if (!DLocked)
-						attrD.setEnabled(true);
-					if (!ELocked)
-						attrE.setEnabled(true);
-				} else if ((JButton) e.getSource() == attrD) {
-					DLocked = false;
-
-					if (!typeLocked)
-						typeD.setEnabled(true);
-					if (!magResLocked)
-						magResD.setEnabled(true);
-					if (!skillsLocked)
-						skillsD.setEnabled(true);
-					if (!resLocked)
-						resD.setEnabled(true);
-
-					if (!BLocked)
-						attrB.setEnabled(true);
-					if (!ALocked)
-						attrA.setEnabled(true);
-					if (!CLocked)
-						attrC.setEnabled(true);
-					if (!ELocked)
-						attrE.setEnabled(true);
-				} else if ((JButton) e.getSource() == attrE) {
-					ELocked = false;
-
-					if (!typeLocked)
-						typeE.setEnabled(true);
-					if (!magResLocked)
-						magResE.setEnabled(true);
-					if (!skillsLocked)
-						skillsE.setEnabled(true);
-					if (!resLocked)
-						resE.setEnabled(true);
-
-					if (!BLocked)
-						attrB.setEnabled(true);
-					if (!ALocked)
-						attrA.setEnabled(true);
-					if (!CLocked)
-						attrC.setEnabled(true);
-					if (!DLocked)
-						attrD.setEnabled(true);
-				}
-			}
-		}
-	}
-
-	private class magResListener implements ActionListener {
-		MagicResonancePriority[] magResVals;
-
-		private magResListener(MagicResonancePriority[] magResVals) {
-			this.magResVals = magResVals;
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (charMagicResonance == null) {
-				charMagicResonance = magResVals;
-				magResLocked = true;
-				if ((JButton) e.getSource() == magResA) {
-					ALocked = true;
-					chosenMagResPriorityIndex = 0;
-
-					typeA.setEnabled(false);
-					attrA.setEnabled(false);
-					skillsA.setEnabled(false);
-					resA.setEnabled(false);
-
-					magResB.setEnabled(false);
-					magResC.setEnabled(false);
-					magResD.setEnabled(false);
-					magResE.setEnabled(false);
-				} else if ((JButton) e.getSource() == magResB) {
-					BLocked = true;
-					chosenMagResPriorityIndex = 1;
-
-					typeB.setEnabled(false);
-					attrB.setEnabled(false);
-					skillsB.setEnabled(false);
-					resB.setEnabled(false);
-
-					magResA.setEnabled(false);
-					magResC.setEnabled(false);
-					magResD.setEnabled(false);
-					magResE.setEnabled(false);
-				} else if ((JButton) e.getSource() == magResC) {
-					CLocked = true;
-					chosenMagResPriorityIndex = 2;
-
-					typeC.setEnabled(false);
-					attrC.setEnabled(false);
-					skillsC.setEnabled(false);
-					resC.setEnabled(false);
-
-					magResB.setEnabled(false);
-					magResA.setEnabled(false);
-					magResD.setEnabled(false);
-					magResE.setEnabled(false);
-				} else if ((JButton) e.getSource() == magResD) {
-					DLocked = true;
-					chosenMagResPriorityIndex = 3;
-
-					typeD.setEnabled(false);
-					attrD.setEnabled(false);
-					skillsD.setEnabled(false);
-					resD.setEnabled(false);
-
-					magResB.setEnabled(false);
-					magResC.setEnabled(false);
-					magResA.setEnabled(false);
-					magResE.setEnabled(false);
-				} else if ((JButton) e.getSource() == magResE) {
-					ELocked = true;
-					chosenMagResPriorityIndex = 4;
-
-					typeE.setEnabled(false);
-					attrE.setEnabled(false);
-					skillsE.setEnabled(false);
-					resE.setEnabled(false);
-
-					magResB.setEnabled(false);
-					magResC.setEnabled(false);
-					magResD.setEnabled(false);
-					magResA.setEnabled(false);
-				}
-			} else {
-				charMagicResonance = null;
-				magResLocked = false;
-				chosenMagResPriorityIndex = -1;
-
-				if ((JButton) e.getSource() == magResA) {
-					ALocked = false;
-
-					if (!typeLocked)
-						typeA.setEnabled(true);
-					if (!attrLocked)
-						attrA.setEnabled(true);
-					if (!skillsLocked)
-						skillsA.setEnabled(true);
-					if (!resLocked)
-						resA.setEnabled(true);
-
-					if (!BLocked)
-						magResB.setEnabled(true);
-					if (!CLocked)
-						magResC.setEnabled(true);
-					if (!DLocked)
-						magResD.setEnabled(true);
-					if (!ELocked)
-						magResE.setEnabled(true);
-				} else if ((JButton) e.getSource() == magResB) {
-					BLocked = false;
-
-					if (!typeLocked)
-						typeB.setEnabled(true);
-					if (!attrLocked)
-						attrB.setEnabled(true);
-					if (!skillsLocked)
-						skillsB.setEnabled(true);
-					if (!resLocked)
-						resB.setEnabled(true);
-
-					if (!ALocked)
-						magResA.setEnabled(true);
-					if (!CLocked)
-						magResC.setEnabled(true);
-					if (!DLocked)
-						magResD.setEnabled(true);
-					if (!ELocked)
-						magResE.setEnabled(true);
-				} else if ((JButton) e.getSource() == magResC) {
-					CLocked = false;
-
-					if (!typeLocked)
-						typeC.setEnabled(true);
-					if (!attrLocked)
-						attrC.setEnabled(true);
-					if (!skillsLocked)
-						skillsC.setEnabled(true);
-					if (!resLocked)
-						resC.setEnabled(true);
-
-					if (!BLocked)
-						magResB.setEnabled(true);
-					if (!ALocked)
-						magResA.setEnabled(true);
-					if (!DLocked)
-						magResD.setEnabled(true);
-					if (!ELocked)
-						magResE.setEnabled(true);
-				} else if ((JButton) e.getSource() == magResD) {
-					DLocked = false;
-
-					if (!typeLocked)
-						typeD.setEnabled(true);
-					if (!attrLocked)
-						attrD.setEnabled(true);
-					if (!skillsLocked)
-						skillsD.setEnabled(true);
-					if (!resLocked)
-						resD.setEnabled(true);
-
-					if (!BLocked)
-						magResB.setEnabled(true);
-					if (!ALocked)
-						magResA.setEnabled(true);
-					if (!CLocked)
-						magResC.setEnabled(true);
-					if (!ELocked)
-						magResE.setEnabled(true);
-				} else if ((JButton) e.getSource() == magResE) {
-					ELocked = false;
-
-					if (!typeLocked)
-						typeE.setEnabled(true);
-					if (!attrLocked)
-						attrE.setEnabled(true);
-					if (!skillsLocked)
-						skillsE.setEnabled(true);
-					if (!resLocked)
-						resE.setEnabled(true);
-
-					if (!BLocked)
-						magResB.setEnabled(true);
-					if (!ALocked)
-						magResA.setEnabled(true);
-					if (!CLocked)
-						magResC.setEnabled(true);
-					if (!DLocked)
-						magResD.setEnabled(true);
-				}
-			}
-		}
-	}
-
-	private class skillListener implements ActionListener {
-		int skills, skillGroups;
-
-		private skillListener(int skill, int skillGroup) {
-			this.skills = skill;
-			this.skillGroups = skillGroup;
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (charSkills == -1 && charSkillGroups == -1) {
-				charSkills = skills;
-				charSkillGroups = skillGroups;
-				skillsLocked = true;
-				if ((JButton) e.getSource() == skillsA) {
-					ALocked = true;
-
-					typeA.setEnabled(false);
-					attrA.setEnabled(false);
-					magResA.setEnabled(false);
-					resA.setEnabled(false);
-
-					skillsB.setEnabled(false);
-					skillsC.setEnabled(false);
-					skillsD.setEnabled(false);
-					skillsE.setEnabled(false);
-				} else if ((JButton) e.getSource() == skillsB) {
-					BLocked = true;
-
-					typeB.setEnabled(false);
-					attrB.setEnabled(false);
-					magResB.setEnabled(false);
-					resB.setEnabled(false);
-
-					skillsA.setEnabled(false);
-					skillsC.setEnabled(false);
-					skillsD.setEnabled(false);
-					skillsE.setEnabled(false);
-				} else if ((JButton) e.getSource() == skillsC) {
-					CLocked = true;
-
-					typeC.setEnabled(false);
-					attrC.setEnabled(false);
-					magResC.setEnabled(false);
-					resC.setEnabled(false);
-
-					skillsB.setEnabled(false);
-					skillsA.setEnabled(false);
-					skillsD.setEnabled(false);
-					skillsE.setEnabled(false);
-				} else if ((JButton) e.getSource() == skillsD) {
-					DLocked = true;
-
-					typeD.setEnabled(false);
-					attrD.setEnabled(false);
-					magResD.setEnabled(false);
-					resD.setEnabled(false);
-
-					skillsB.setEnabled(false);
-					skillsC.setEnabled(false);
-					skillsA.setEnabled(false);
-					skillsE.setEnabled(false);
-				} else if ((JButton) e.getSource() == skillsE) {
-					ELocked = true;
-
-					typeE.setEnabled(false);
-					attrE.setEnabled(false);
-					magResE.setEnabled(false);
-					resE.setEnabled(false);
-
-					skillsB.setEnabled(false);
-					skillsC.setEnabled(false);
-					skillsD.setEnabled(false);
-					skillsA.setEnabled(false);
-				}
-			} else {
-				charSkills = -1;
-				charSkillGroups = -1;
-				skillsLocked = false;
-
-				if ((JButton) e.getSource() == skillsA) {
-					ALocked = false;
-
-					if (!typeLocked)
-						typeA.setEnabled(true);
-					if (!attrLocked)
-						attrA.setEnabled(true);
-					if (!magResLocked)
-						magResA.setEnabled(true);
-					if (!resLocked)
-						resA.setEnabled(true);
-
-					if (!BLocked)
-						skillsB.setEnabled(true);
-					if (!CLocked)
-						skillsC.setEnabled(true);
-					if (!DLocked)
-						skillsD.setEnabled(true);
-					if (!ELocked)
-						skillsE.setEnabled(true);
-				} else if ((JButton) e.getSource() == skillsB) {
-					BLocked = false;
-
-					if (!typeLocked)
-						typeB.setEnabled(true);
-					if (!attrLocked)
-						attrB.setEnabled(true);
-					if (!magResLocked)
-						magResB.setEnabled(true);
-					if (!resLocked)
-						resB.setEnabled(true);
-
-					if (!ALocked)
-						skillsA.setEnabled(true);
-					if (!CLocked)
-						skillsC.setEnabled(true);
-					if (!DLocked)
-						skillsD.setEnabled(true);
-					if (!ELocked)
-						skillsE.setEnabled(true);
-				} else if ((JButton) e.getSource() == skillsC) {
-					CLocked = false;
-
-					if (!typeLocked)
-						typeC.setEnabled(true);
-					if (!attrLocked)
-						attrC.setEnabled(true);
-					if (!magResLocked)
-						magResC.setEnabled(true);
-					if (!resLocked)
-						resC.setEnabled(true);
-
-					if (!BLocked)
-						skillsB.setEnabled(true);
-					if (!ALocked)
-						skillsA.setEnabled(true);
-					if (!DLocked)
-						skillsD.setEnabled(true);
-					if (!ELocked)
-						skillsE.setEnabled(true);
-				} else if ((JButton) e.getSource() == skillsD) {
-					DLocked = false;
-
-					if (!typeLocked)
-						typeD.setEnabled(true);
-					if (!attrLocked)
-						attrD.setEnabled(true);
-					if (!magResLocked)
-						magResD.setEnabled(true);
-					if (!resLocked)
-						resD.setEnabled(true);
-
-					if (!BLocked)
-						skillsB.setEnabled(true);
-					if (!ALocked)
-						skillsA.setEnabled(true);
-					if (!CLocked)
-						skillsC.setEnabled(true);
-					if (!ELocked)
-						skillsE.setEnabled(true);
-				} else if ((JButton) e.getSource() == skillsE) {
-					ELocked = false;
-
-					if (!typeLocked)
-						typeE.setEnabled(true);
-					if (!attrLocked)
-						attrE.setEnabled(true);
-					if (!magResLocked)
-						magResE.setEnabled(true);
-					if (!resLocked)
-						resE.setEnabled(true);
-
-					if (!BLocked)
-						skillsB.setEnabled(true);
-					if (!ALocked)
-						skillsA.setEnabled(true);
-					if (!CLocked)
-						skillsC.setEnabled(true);
-					if (!DLocked)
-						skillsD.setEnabled(true);
-				}
-			}
-		}
-	}
-
-	private class ressourceListener implements ActionListener {
-		int ressources;
-
-		private ressourceListener(int ressources) {
-			this.ressources = ressources;
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (charRessources == -1) {
-				charRessources = ressources;
-				resLocked = true;
-				if ((JButton) e.getSource() == resA) {
-					ALocked = true;
-
-					typeA.setEnabled(false);
-					attrA.setEnabled(false);
-					magResA.setEnabled(false);
-					skillsA.setEnabled(false);
-
-					resB.setEnabled(false);
-					resC.setEnabled(false);
-					resD.setEnabled(false);
-					resE.setEnabled(false);
-				} else if ((JButton) e.getSource() == resB) {
-					BLocked = true;
-
-					typeB.setEnabled(false);
-					attrB.setEnabled(false);
-					magResB.setEnabled(false);
-					skillsB.setEnabled(false);
-
-					resA.setEnabled(false);
-					resC.setEnabled(false);
-					resD.setEnabled(false);
-					resE.setEnabled(false);
-				} else if ((JButton) e.getSource() == resC) {
-					CLocked = true;
-
-					typeC.setEnabled(false);
-					attrC.setEnabled(false);
-					magResC.setEnabled(false);
-					skillsC.setEnabled(false);
-
-					resB.setEnabled(false);
-					resA.setEnabled(false);
-					resD.setEnabled(false);
-					resE.setEnabled(false);
-				} else if ((JButton) e.getSource() == resD) {
-					DLocked = true;
-
-					typeD.setEnabled(false);
-					attrD.setEnabled(false);
-					magResD.setEnabled(false);
-					skillsD.setEnabled(false);
-
-					resB.setEnabled(false);
-					resC.setEnabled(false);
-					resA.setEnabled(false);
-					resE.setEnabled(false);
-				} else if ((JButton) e.getSource() == resE) {
-					ELocked = true;
-
-					typeE.setEnabled(false);
-					attrE.setEnabled(false);
-					magResE.setEnabled(false);
-					skillsE.setEnabled(false);
-
-					resB.setEnabled(false);
-					resC.setEnabled(false);
-					resD.setEnabled(false);
-					resA.setEnabled(false);
-				}
-			} else {
-				charRessources = -1;
-				resLocked = false;
-
-				if ((JButton) e.getSource() == resA) {
-					ALocked = false;
-
-					if (!typeLocked)
-						typeA.setEnabled(true);
-					if (!attrLocked)
-						attrA.setEnabled(true);
-					if (!magResLocked)
-						magResA.setEnabled(true);
-					if (!skillsLocked)
-						skillsA.setEnabled(true);
-
-					if (!BLocked)
-						resB.setEnabled(true);
-					if (!CLocked)
-						resC.setEnabled(true);
-					if (!DLocked)
-						resD.setEnabled(true);
-					if (!ELocked)
-						resE.setEnabled(true);
-				} else if ((JButton) e.getSource() == resB) {
-					BLocked = false;
-
-					if (!typeLocked)
-						typeB.setEnabled(true);
-					if (!attrLocked)
-						attrB.setEnabled(true);
-					if (!magResLocked)
-						magResB.setEnabled(true);
-					if (!skillsLocked)
-						skillsB.setEnabled(true);
-
-					if (!ALocked)
-						resA.setEnabled(true);
-					if (!CLocked)
-						resC.setEnabled(true);
-					if (!DLocked)
-						resD.setEnabled(true);
-					if (!ELocked)
-						resE.setEnabled(true);
-				} else if ((JButton) e.getSource() == resC) {
-					CLocked = false;
-
-					if (!typeLocked)
-						typeC.setEnabled(true);
-					if (!attrLocked)
-						attrC.setEnabled(true);
-					if (!magResLocked)
-						magResC.setEnabled(true);
-					if (!skillsLocked)
-						skillsC.setEnabled(true);
-
-					if (!BLocked)
-						resB.setEnabled(true);
-					if (!ALocked)
-						resA.setEnabled(true);
-					if (!DLocked)
-						resD.setEnabled(true);
-					if (!ELocked)
-						resE.setEnabled(true);
-				} else if ((JButton) e.getSource() == resD) {
-					DLocked = false;
-
-					if (!typeLocked)
-						typeD.setEnabled(true);
-					if (!attrLocked)
-						attrD.setEnabled(true);
-					if (!magResLocked)
-						magResD.setEnabled(true);
-					if (!skillsLocked)
-						skillsD.setEnabled(true);
-
-					if (!BLocked)
-						resB.setEnabled(true);
-					if (!ALocked)
-						resA.setEnabled(true);
-					if (!CLocked)
-						resC.setEnabled(true);
-					if (!ELocked)
-						resE.setEnabled(true);
-				} else if ((JButton) e.getSource() == resE) {
-					ELocked = false;
-
-					if (!typeLocked)
-						typeE.setEnabled(true);
-					if (!attrLocked)
-						attrE.setEnabled(true);
-					if (!magResLocked)
-						magResE.setEnabled(true);
-					if (!skillsLocked)
-						skillsE.setEnabled(true);
-
-					if (!BLocked)
-						resB.setEnabled(true);
-					if (!ALocked)
-						resA.setEnabled(true);
-					if (!CLocked)
-						resC.setEnabled(true);
-					if (!DLocked)
-						resD.setEnabled(true);
-				}
-			}
-		}
-	}
-
-	private class TypePriority {
-		private Metatype[] type;
-		private int[] specialAttributes;
-
-		private TypePriority(Metatype[] type, int[] specialAttributes) {
-			this.type = type;
-			this.specialAttributes = specialAttributes;
-		}
-	}
-
-	private class MagicResonancePriority {
-		private int MagicResonance;
-		private int numOfMagicSkills;
-		private int valueOfMagicSkills;
-		private int numOfSkills;
-		private int valueOfSkills;
-		private int numOfMagicSkillGroups;
-		private int valueOfMagicSkillGroups;
-		private int numOfSpellsComplexForms;
-
-		private MagicResonancePriority(int MagicResonance,
-				int numOfMagicSkills, int valueOfMagicSkills, int numOfSkills,
-				int valueOfSkills, int numOfMagicSkillGroups,
-				int valueOfMagicSkillGroups, int numOfSpellsComplexForms) {
-			this.MagicResonance = MagicResonance;
-			this.numOfMagicSkills = numOfMagicSkills;
-			this.valueOfMagicSkills = valueOfMagicSkills;
-			this.numOfSkills = numOfSkills;
-			this.valueOfSkills = valueOfSkills;
-			this.numOfMagicSkillGroups = numOfMagicSkillGroups;
-			this.valueOfMagicSkillGroups = valueOfMagicSkillGroups;
-			this.numOfSpellsComplexForms = numOfSpellsComplexForms;
-		}
-	}
-
-private void setCharPic(){
+	private void setCharPic(){
 	JFileChooser c= new JFileChooser();
 	int retVal= c.showOpenDialog(this);
 	if (retVal==JFileChooser.APPROVE_OPTION){
@@ -12649,7 +11091,7 @@ private void setCharPic(){
 		}
 	}
 	
-	private void saveCharacter() {
+	public void saveCharacter() {
 		if (saveAllowed){
 			JFileChooser c= new JFileChooser();
 			try{
