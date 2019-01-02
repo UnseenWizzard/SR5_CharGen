@@ -190,8 +190,7 @@ public class MainFrame extends JFrame {
 	public boolean resLocked = false;
 	public boolean saveAllowed=true;
 	public ListRoutine LR;
-	private JMenu advancement = null;
-	private JMenu help =null;
+	public MainMenu mainMenu;
 
 	public MainFrame() {
 		this.LR = new ListRoutine();
@@ -247,7 +246,7 @@ public class MainFrame extends JFrame {
 		 }
 	}
 
-	private void startCharacterGeneration() {
+	public void startCharacterGeneration() {
 		this.saveAllowed=false;
 		if (currentCharacter != null) {
 		
@@ -3871,9 +3870,9 @@ public class MainFrame extends JFrame {
 				freeSpells = charMagicResonance[3].numOfSpellsComplexForms;
 			}
 		} else {
-			this.getJMenuBar().remove(help);
-			this.getJMenuBar().add(advancement);
-			this.getJMenuBar().add(help);
+			this.getJMenuBar().remove(mainMenu.help);
+			this.getJMenuBar().add(mainMenu.advancement);
+			this.getJMenuBar().add(mainMenu.help);
 			if (currentCharacter.getQualities().contains(
 					new Quality("Aptitude", null, true, 0))) {
 				skMax = 13;
@@ -11032,7 +11031,7 @@ public class MainFrame extends JFrame {
 	}
 	
 //TODO add filters to only show .char/.pdf!
-	private void loadCharacter() {
+public void loadCharacter() {
 		int retVal=0;
 		if (currentCharacter!=null){
 			retVal=JOptionPane.showConfirmDialog(this.getContentPane(), new JComponent[]{
@@ -11208,7 +11207,7 @@ public class MainFrame extends JFrame {
 		contentStream.setStrokingColor(Color.BLACK);
 	}
 
-	private void printCharacter(){
+	public void printCharacter(){
 		if (saveAllowed && currentCharacter!=null){
 		boolean showNotes=false;
 		JFileChooser c= new JFileChooser();
@@ -13282,7 +13281,7 @@ public class MainFrame extends JFrame {
 		}
 	}
 
-	private void raiseCharKarma(){
+	public void raiseCharKarma(){
 		JSpinner sp = new JSpinner(new SpinnerNumberModel(1,1,999,1));
 		JComponent[] input = new JComponent[]{
 				new JLabel ("Raise character karma by"),
@@ -13293,7 +13292,7 @@ public class MainFrame extends JFrame {
 		}
 	}
 
-	private void raiseCharMoney(){
+	public void raiseCharMoney(){
 		JSpinner sp = new JSpinner(new SpinnerNumberModel(1,1,9000000,50));
 		JComponent[] input = new JComponent[]{
 			new JLabel ("Raise character Currency by"),
@@ -13304,7 +13303,7 @@ public class MainFrame extends JFrame {
 		}
 	}
 	
-	private void raiseCharNotoriety(){
+	public void raiseCharNotoriety(){
 		JSpinner sp = new JSpinner(new SpinnerNumberModel(1,1,999,1));
 		JComponent[] input = new JComponent[]{
 			new JLabel ("Raise character Notoriety by"),
@@ -13315,7 +13314,7 @@ public class MainFrame extends JFrame {
 		}
 	}
 	
-	private void raiseCharPublicAwareness(){
+	public void raiseCharPublicAwareness(){
 		JSpinner sp = new JSpinner(new SpinnerNumberModel(1,1,999,1));
 		JComponent[] input = new JComponent[]{
 			new JLabel ("Raise character Public Awareness by"),
@@ -13326,7 +13325,7 @@ public class MainFrame extends JFrame {
 		}
 	}
 	
-	private void buyOffCharNotoriety(){
+	public void buyOffCharNotoriety(){
 		JSpinner sp = new JSpinner(new SpinnerNumberModel(1,1,(int)Math.floor((double)currentCharacter.getPersonalData().getStreetCred()/2),1));
 		JComponent[] input = new JComponent[]{
 			new JLabel ("You can buy off 1 point of Notoriety by spending 2 points of StreetCred"),
@@ -13338,7 +13337,7 @@ public class MainFrame extends JFrame {
 		}
 	}
 	
-	private void raiseCharStreetCred(){
+	public void raiseCharStreetCred(){
 		JSpinner sp = new JSpinner(new SpinnerNumberModel(1,1,999,1));
 		JComponent[] input = new JComponent[]{
 			new JLabel ("Raise character StreetCred by"),
@@ -13349,7 +13348,7 @@ public class MainFrame extends JFrame {
 		}
 	}
 	
-	private void rollDice() {
+	public void rollDice() {
 		JSpinner dice = new JSpinner(new SpinnerNumberModel(1,1,9999,1));
 		JComboBox<String> limit = new JComboBox<String>();
 		limit.addItem("None");
@@ -13387,16 +13386,16 @@ public class MainFrame extends JFrame {
 
 	}
 	
-	private void rollRandomRun() {
+	public void rollRandomRun() {
 		System.out.println(RandomRunGenerator.generateRandomRun());
 		JOptionPane.showMessageDialog(this.getContentPane(), RandomRunGenerator.generateRandomRun());		
 	}
 	
-	private void showHelp() {
+	public void showHelp() {
 		JOptionPane.showMessageDialog(this.getContentPane(), "No one can help you!");		
 	}
 
-	private void showAbout() {
+	public void showAbout() {
 		JOptionPane.showMessageDialog(this.getContentPane(), new JLabel("<html><p>(c)2014 Nicolá Michel Henry Riedmann</p><p>This free software has no affiliation whatsoever with Shadowrun or Catalyst Games Labs.</p></html>"));
 	}
 
@@ -13505,201 +13504,8 @@ public class MainFrame extends JFrame {
 	}
 	
 	private void generateMenu() {
-		JMenuBar menubar = new JMenuBar();
-		/* Image */Icon iconNew = UIManager.getIcon("FileView.fileIcon");// new
-																			// ImageIcon("graphics/new.png");
-		/* Image */Icon iconOpen = UIManager.getIcon("FileView.directoryIcon");// new
-																				// ImageIcon("graphics/open.png");
-		/* Image */Icon iconSave = UIManager
-				.getIcon("FileView.floppyDriveIcon");// new
-														// ImageIcon("graphics/save.png");
-		/* Image */Icon iconPrint = UIManager.getIcon("FileView.computerIcon");
-		/* Image */Icon iconHelp = UIManager.getIcon("OptionPane.questionIcon");// new
-																				// ImageIcon("graphics/help.png");
-		/* Image */Icon iconAbout = UIManager
-				.getIcon("OptionPane.informationIcon");// new
-														// ImageIcon("graphics/about.png");
-
-		JMenu character = new JMenu("Character");
-		JMenu group = new JMenu("Group");
-		JMenu tools = new JMenu("Tools");
-		advancement = new JMenu("Advancement");
-		help = new JMenu("Help");
-
-		JMenuItem newChar = new JMenuItem("New", iconNew);
-		JMenuItem loadChar = new JMenuItem("Load", iconOpen);
-		JMenuItem saveChar = new JMenuItem("Save", iconSave);
-		JMenuItem printChar = new JMenuItem("Export(PDF)",iconPrint);
-		
-		JMenuItem newGroup = new JMenuItem("New", iconNew);
-		JMenuItem loadGroup = new JMenuItem("Load", iconOpen);
-		JMenuItem saveGroup = new JMenuItem("Save", iconSave);
-		
-		JMenuItem dieRoller = new JMenuItem("Die Roller");
-		JMenuItem randomRunGen = new JMenuItem("Random Run Generator");
-		
-		JMenuItem addKarma = new JMenuItem("Add Karma");
-		JMenuItem addMoney = new JMenuItem("Add Money");
-		JMenuItem addExtraStreetCred = new JMenuItem("Raise Street Cred");
-		JMenuItem addNotoriety = new JMenuItem("Raise Notoriety");
-		JMenuItem buyOffNotoriety = new JMenuItem("Buy off Notoriety");
-		JMenuItem addPublicAwareness = new JMenuItem("Raise Public Awareness");
-
-		JMenuItem showHelp = new JMenuItem("Show help", iconHelp);
-		JMenuItem about = new JMenuItem("About SR5 Chargen", iconAbout);
-
-		newChar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				startCharacterGeneration();
-			}
-		});
-
-		loadChar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				loadCharacter();
-			}
-		});
-
-		saveChar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				saveCharacter();
-			}
-		});
-
-		printChar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				printCharacter();
-			}
-		});
-		
-		showHelp.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				showHelp();
-			}
-		});
-
-		about.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				showAbout();
-			}
-		});
-
-		newGroup.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//TODO CREATE NEW GROUP
-			}
-		});
-
-		loadGroup.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//TODO LOAD AND DISPLAY A GROUP
-			}
-		});
-
-		saveGroup.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//TODO SAVE A GROUP
-			}
-		});
-		
-		dieRoller.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				rollDice();
-				
-			}
-		});
-		
-		randomRunGen.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				rollRandomRun();
-				
-			}
-		});
-
-		addKarma.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				raiseCharKarma();
-			}
-		});
-
-		addMoney.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				raiseCharMoney();
-			}
-		});
-		
-		addNotoriety.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				raiseCharNotoriety();
-			}
-		});
-		
-		addPublicAwareness.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				raiseCharPublicAwareness();
-			}
-		});
-		
-		addExtraStreetCred.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				raiseCharStreetCred();
-			}
-		});
-		
-		buyOffNotoriety.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				buyOffCharNotoriety();
-			}
-		});
-
-		character.add(newChar);
-		character.add(loadChar);
-		character.add(saveChar);
-		character.add(printChar);
-		
-		group.add(newGroup);
-		group.add(loadGroup);
-		group.add(saveGroup);
-		
-		tools.add(dieRoller);
-		tools.add(randomRunGen);
-		
-		advancement.add(addKarma);
-		advancement.add(addMoney);
-		advancement.add(addExtraStreetCred);
-		advancement.add(addNotoriety);
-		advancement.add(buyOffNotoriety);
-		advancement.add(addPublicAwareness);
-
-		help.add(showHelp);
-		help.add(about);
-
-		menubar.add(character);
-		menubar.add(group);
-		menubar.add(tools);
-		menubar.add(help);
-		
-		this.setJMenuBar(menubar);
+		this.mainMenu = new MainMenu(this);
+		this.setJMenuBar(mainMenu);
 	}
 
 	private void initUI() {
