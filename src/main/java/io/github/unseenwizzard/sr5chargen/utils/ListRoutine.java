@@ -185,9 +185,9 @@ public class ListRoutine {
 	public void loadSkillList() {
 		try{
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/skillList.xml";
+			String pathText = "data/skillList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-					pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/skillList.xml");
+					pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "data/skillList.xml");
 			File load = new File(pathText);
 			this.skillList = (ArrayList<Skill>)xstream.fromXML(load);	
 		} catch (Exception e){
@@ -200,9 +200,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/skillList.xml";
+			String pathText = "data/skillList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-					pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/skillList.xml");
+					pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "data/skillList.xml");
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
 			System.err.println("Failure opening/creating save file!");
@@ -286,9 +286,9 @@ public class ListRoutine {
 	public void loadSkillGroupList() {
 		try{
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/skillGroupList.xml";
+			String pathText = "data/skillGroupList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-					pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/skillGroupList.xml");
+					pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/skillGroupList.xml");
 			File load = new File(pathText);
 			this.skillGroupList = (ArrayList<SkillGroup>)xstream.fromXML(load);	
 		} catch (Exception e){
@@ -302,9 +302,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/skillGroupList.xml";
+			String pathText = "data/skillGroupList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-					pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/skillGroupList.xml");
+					pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/skillGroupList.xml");
 			saveFile=new FileOutputStream(pathText);
 		} catch (Exception e){
 			System.err.println("Failure opening/creating save file!");
@@ -398,9 +398,9 @@ public class ListRoutine {
 	public void loadQualityList() {
 		try{
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/qualityList.xml";
+			String pathText = "data/qualityList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-					pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/qualityList.xml");
+					pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/qualityList.xml");
 			File load = new File(pathText);
 			this.qualityList = (ArrayList<Quality>)xstream.fromXML(load);	
 		} catch (Exception e){
@@ -412,9 +412,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/skillList.xml";
+			String pathText = "data/skillList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-					pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/qualityList.xml");
+					pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/qualityList.xml");
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
 			System.err.println("Failure opening/creating save file!");
@@ -631,9 +631,9 @@ public class ListRoutine {
 	public void loadSpellList() {
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/spellList.xml";
+			String pathText = "data/spellList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/spellList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/spellList.xml");
 
 			File load = new File(pathText);
 			this.spellList = (ArrayList<Spell>)xstream.fromXML(load);	
@@ -646,9 +646,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/spellList.xml";
+			String pathText = "data/spellList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/spellList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/spellList.xml");
 			
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -750,9 +750,9 @@ public class ListRoutine {
 	public void loadRitualList() {
 		try{
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/ritualList.xml";
+			String pathText = "data/ritualList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/ritualList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/ritualList.xml");
 
 			File load = new File(pathText);
 			this.ritualList = (ArrayList<Spell>)xstream.fromXML(load);
@@ -765,9 +765,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/ritualList.xml";
+			String pathText = "data/ritualList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/ritualList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/ritualList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -857,9 +857,9 @@ public class ListRoutine {
 	public void loadCompFormList() {
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/complexFormList.xml";
+			String pathText = "data/complexFormList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/complexFormList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/complexFormList.xml");
 
 			File load = new File(pathText);
 			this.complexFormList = (ArrayList<Spell>)xstream.fromXML(load);
@@ -872,9 +872,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/complexFormList.xml";
+			String pathText = "data/complexFormList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/complexFormList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/complexFormList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -950,9 +950,9 @@ public class ListRoutine {
 	public void loadProgList() {
 		try{
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/programList.xml";
+			String pathText = "data/programList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/programList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/programList.xml");
 
 			File load = new File(pathText);
 			this.programList = (ArrayList<Program>)xstream.fromXML(load);
@@ -965,9 +965,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/programList.xml";
+			String pathText = "data/programList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/programList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/programList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -1046,9 +1046,9 @@ public class ListRoutine {
 	public void loadPowList() {
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/powerList.xml";
+			String pathText = "data/powerList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/powerList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/powerList.xml");
 
 			File load = new File(pathText);
 			this.powerList = (ArrayList<Power>)xstream.fromXML(load);
@@ -1061,9 +1061,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/powerList.xml";
+			String pathText = "data/powerList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/powerList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/powerList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -1169,9 +1169,9 @@ public class ListRoutine {
 	public void loadAgentList() {
 		try{
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/agentList.xml";
+			String pathText = "data/agentList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/agentList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/agentList.xml");
 
 		File load = new File(pathText);
 		this.agentList = (ArrayList<Agent>)xstream.fromXML(load);
@@ -1184,9 +1184,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/agentList.xml";
+			String pathText = "data/agentList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/agentList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/agentList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -1267,9 +1267,9 @@ public class ListRoutine {
 	public void loadAmmuList() {
 		try{
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/ammunitionList.xml";
+			String pathText = "data/ammunitionList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/ammunitionList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/ammunitionList.xml");
 
 		File load = new File(pathText);
 		this.ammuList = (ArrayList<Ammunition>)xstream.fromXML(load);
@@ -1282,9 +1282,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/ammunitionList.xml";
+			String pathText = "data/ammunitionList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/ammunitionList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/ammunitionList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -1369,9 +1369,9 @@ public class ListRoutine {
 	public void loadArmorList() {
 		try{
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/armorList.xml";
+			String pathText = "data/armorList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/armorList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/armorList.xml");
 
 		File load = new File(pathText);
 		this.armorList = (ArrayList<Armor>)xstream.fromXML(load);
@@ -1384,9 +1384,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/armorList.xml";
+			String pathText = "data/armorList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/armorList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/armorList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -1489,9 +1489,9 @@ public class ListRoutine {
 	public void loadAugmentationList() {
 		try{
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/augmentList.xml";
+			String pathText = "data/augmentList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/augmentList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/augmentList.xml");
 
 		File load = new File(pathText);
 		this.augmentList = (ArrayList<Augmentation>)xstream.fromXML(load);
@@ -1504,9 +1504,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/augmentList.xml";
+			String pathText = "data/augmentList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/augmentList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/augmentList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -1597,9 +1597,9 @@ public class ListRoutine {
 	public void loadDeckList() {
 		try{
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/deckList.xml";
+			String pathText = "data/deckList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/deckList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/deckList.xml");
 
 		File load = new File(pathText);
 		this.deckList = (ArrayList<Deck>)xstream.fromXML(load);
@@ -1611,9 +1611,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/deckList.xml";
+			String pathText = "data/deckList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/deckList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/deckList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -1703,11 +1703,11 @@ public class ListRoutine {
 	public void loadGearList() {
 		try{
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/gearList.xml";
+			String pathText = "data/gearList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/gearList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/gearList.xml");
 
-		File load = new File("io/github/unseenwizzard/sr5chargen/data/gearList.xml");
+		File load = new File("data/gearList.xml");
 		this.gearList = (ArrayList<Gear>)xstream.fromXML(load);
 		}catch(Exception e){
 			
@@ -1717,9 +1717,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/gearList.xml";
+			String pathText = "data/gearList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/gearList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/gearList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -1810,9 +1810,9 @@ public class ListRoutine {
 	public void loadMeeleWpList() {
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/meeleWeaponList.xml";
+			String pathText = "data/meeleWeaponList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/meeleWeaponList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/meeleWeaponList.xml");
 
 		File load = new File(pathText);
 		this.meeleWpList = (ArrayList<MeeleWeapon>)xstream.fromXML(load);	
@@ -1825,9 +1825,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/meeleWeaponList.xml";
+			String pathText = "data/meeleWeaponList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/meeleWeaponList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/meeleWeaponList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -1965,9 +1965,9 @@ public class ListRoutine {
 	public void loadRangedWpList() {
 		try{
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/rangedWeaponList.xml";
+			String pathText = "data/rangedWeaponList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/rangedWeaponList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/rangedWeaponList.xml");
 
 		File load = new File(pathText);
 		this.rangedWpList = (ArrayList<RangedWeapon>)xstream.fromXML(load);
@@ -1979,9 +1979,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/rangedWeaponList.xml";
+			String pathText = "data/rangedWeaponList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/rangedWeaponList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/rangedWeaponList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -2084,9 +2084,9 @@ public class ListRoutine {
 	public void loadWeaponModList() {
 		try{
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/weaponmodificationList.xml";
+			String pathText = "data/weaponmodificationList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/weaponmodificationList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/weaponmodificationList.xml");
 
 		File load = new File(pathText);
 		this.wpModList = (ArrayList<WeaponModification>)xstream.fromXML(load);
@@ -2098,9 +2098,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/weaponmodificationList.xml";
+			String pathText = "data/weaponmodificationList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/weaponmodificationList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/weaponmodificationList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -2179,9 +2179,9 @@ public class ListRoutine {
 	public void loadGrenadeList() {
 		try{
 		File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-		String pathText = "io/github/unseenwizzard/sr5chargen/data/grenadeList.xml";
+		String pathText = "data/grenadeList.xml";
 		if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-			pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/grenadeList.xml");
+			pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/grenadeList.xml");
 
 		File load = new File(pathText);
 		this.grenadeList = (ArrayList<Grenade>)xstream.fromXML(load);	
@@ -2193,9 +2193,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/grenadeList.xml";
+			String pathText = "data/grenadeList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/grenadeList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/grenadeList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
@@ -2308,9 +2308,9 @@ public class ListRoutine {
 	public void loadVehicleList() {
 		try{
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/vehicleList.xml";
+			String pathText = "data/vehicleList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/vehicleList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/vehicleList.xml");
 
 		File load = new File(pathText);
 		this.vehicleList = (ArrayList<Vehicle>)xstream.fromXML(load);	
@@ -2322,9 +2322,9 @@ public class ListRoutine {
 		FileOutputStream saveFile=null;
 		try {
 			File path= new File(ListRoutine.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			String pathText = "io/github/unseenwizzard/sr5chargen/data/vehicleList.xml";
+			String pathText = "data/vehicleList.xml";
 			if (path.getAbsolutePath().endsWith("SR5CharGen.jar"))
-				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+ "io/github/unseenwizzard/sr5chargen/data/vehicleList.xml");
+				pathText=(path.getAbsolutePath().substring(0, path.getAbsolutePath().length()-14)+"data/vehicleList.xml");
 
 			saveFile = new FileOutputStream(pathText);
 		} catch (Exception e){
