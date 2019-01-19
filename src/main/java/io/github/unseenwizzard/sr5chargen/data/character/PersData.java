@@ -34,7 +34,7 @@ public class PersData implements Serializable {
 		this.height=180;
 		this.weight=80;
 		this.streetCred=0;
-		this.karma=0;
+		this.karma=25;
 		this.totalKarma=0;
 		this.notoriety=0;
 		this.publicAwareness=0;
@@ -118,7 +118,7 @@ public class PersData implements Serializable {
 	public void setKarma(int karma) {
 		this.karma = karma;
 	}
-	
+
 	public void addKarma(int karma){
 		this.karma+=karma;
 		this.totalKarma+=karma;

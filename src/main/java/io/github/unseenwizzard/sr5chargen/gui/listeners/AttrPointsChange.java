@@ -1,5 +1,6 @@
 package io.github.unseenwizzard.sr5chargen.gui.listeners;
 
+import io.github.unseenwizzard.sr5chargen.control.CharacterController;
 import io.github.unseenwizzard.sr5chargen.gui.MainFrame;
 
 import javax.swing.*;
@@ -9,9 +10,11 @@ import javax.swing.event.ChangeListener;
 public class AttrPointsChange implements ChangeListener {
 
     private MainFrame mainFrame;
+    private final CharacterController characterController;
 
-    public AttrPointsChange(MainFrame mainFrame) {
+    public AttrPointsChange(MainFrame mainFrame, CharacterController characterController) {
         this.mainFrame = mainFrame;
+        this.characterController = characterController;
     }
 
     @Override
@@ -19,13 +22,13 @@ public class AttrPointsChange implements ChangeListener {
         JSpinner sp = (JSpinner) e.getSource();
         JPanel panel = (JPanel) sp.getParent();
         if (sp.getName() == "bod") {
-            if ((int) sp.getValue() == mainFrame.currentCharacter.getAttributes()
+            if ((int) sp.getValue() == characterController.getCharacter().getAttributes()
                     .getMAXbody()) {
                 if (mainFrame.maxAttributeIndex == -1) {
                     mainFrame.maxAttributeIndex = 0;
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes += characterController.getCharacter().getAttributes()
                             .getBody() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setBody(
+                    characterController.getCharacter().getAttributes().setBody(
                             (int) sp.getValue());
                 } else {
                     JOptionPane
@@ -37,26 +40,26 @@ public class AttrPointsChange implements ChangeListener {
                 }
             } else {
                 if (mainFrame.maxAttributeIndex == 0) {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes += characterController.getCharacter().getAttributes()
                             .getBody() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setBody(
+                    characterController.getCharacter().getAttributes().setBody(
                             (int) sp.getValue());
                     mainFrame.maxAttributeIndex = -1;
                 } else {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes += characterController.getCharacter().getAttributes()
                             .getBody() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setBody(
+                    characterController.getCharacter().getAttributes().setBody(
                             (int) sp.getValue());
                 }
             }
         } else if (sp.getName() == "agi") {
-            if ((int) sp.getValue() == mainFrame.currentCharacter.getAttributes()
+            if ((int) sp.getValue() ==  characterController.getCharacter().getAttributes()
                     .getMAXagility()) {
                 if (mainFrame.maxAttributeIndex == -1) {
                     mainFrame.maxAttributeIndex = 1;
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getAgility() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setAgility(
+                     characterController.getCharacter().getAttributes().setAgility(
                             (int) sp.getValue());
                 } else {
                     JOptionPane
@@ -68,26 +71,26 @@ public class AttrPointsChange implements ChangeListener {
                 }
             } else {
                 if (mainFrame.maxAttributeIndex == 1) {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getAgility() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setAgility(
+                     characterController.getCharacter().getAttributes().setAgility(
                             (int) sp.getValue());
                     mainFrame.maxAttributeIndex = -1;
                 } else {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getAgility() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setAgility(
+                     characterController.getCharacter().getAttributes().setAgility(
                             (int) sp.getValue());
                 }
             }
         } else if (sp.getName() == "rea") {
-            if ((int) sp.getValue() == mainFrame.currentCharacter.getAttributes()
+            if ((int) sp.getValue() ==  characterController.getCharacter().getAttributes()
                     .getMAXreaction()) {
                 if (mainFrame.maxAttributeIndex == -1) {
                     mainFrame.maxAttributeIndex = 2;
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getReaction() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setReaction(
+                     characterController.getCharacter().getAttributes().setReaction(
                             (int) sp.getValue());
                 } else {
                     JOptionPane
@@ -99,26 +102,26 @@ public class AttrPointsChange implements ChangeListener {
                 }
             } else {
                 if (mainFrame.maxAttributeIndex == 2) {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getReaction() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setReaction(
+                     characterController.getCharacter().getAttributes().setReaction(
                             (int) sp.getValue());
                     mainFrame.maxAttributeIndex = -1;
                 } else {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getReaction() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setReaction(
+                     characterController.getCharacter().getAttributes().setReaction(
                             (int) sp.getValue());
                 }
             }
         } else if (sp.getName() == "str") {
-            if ((int) sp.getValue() == mainFrame.currentCharacter.getAttributes()
+            if ((int) sp.getValue() ==  characterController.getCharacter().getAttributes()
                     .getMAXstrength()) {
                 if (mainFrame.maxAttributeIndex == -1) {
                     mainFrame.maxAttributeIndex = 3;
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getStrength() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setStrength(
+                     characterController.getCharacter().getAttributes().setStrength(
                             (int) sp.getValue());
                 } else {
                     JOptionPane
@@ -130,26 +133,26 @@ public class AttrPointsChange implements ChangeListener {
                 }
             } else {
                 if (mainFrame.maxAttributeIndex == 3) {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getStrength() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setStrength(
+                     characterController.getCharacter().getAttributes().setStrength(
                             (int) sp.getValue());
                     mainFrame.maxAttributeIndex = -1;
                 } else {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getStrength() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setStrength(
+                     characterController.getCharacter().getAttributes().setStrength(
                             (int) sp.getValue());
                 }
             }
         } else if (sp.getName() == "wil") {
-            if ((int) sp.getValue() == mainFrame.currentCharacter.getAttributes()
+            if ((int) sp.getValue() ==  characterController.getCharacter().getAttributes()
                     .getMAXwillpower()) {
                 if (mainFrame.maxAttributeIndex == -1) {
                     mainFrame.maxAttributeIndex = 4;
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getWillpower() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setWillpower(
+                     characterController.getCharacter().getAttributes().setWillpower(
                             (int) sp.getValue());
                 } else {
                     JOptionPane
@@ -161,26 +164,26 @@ public class AttrPointsChange implements ChangeListener {
                 }
             } else {
                 if (mainFrame.maxAttributeIndex == 4) {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getWillpower() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setWillpower(
+                     characterController.getCharacter().getAttributes().setWillpower(
                             (int) sp.getValue());
                     mainFrame.maxAttributeIndex = -1;
                 } else {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getWillpower() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setWillpower(
+                     characterController.getCharacter().getAttributes().setWillpower(
                             (int) sp.getValue());
                 }
             }
         } else if (sp.getName() == "log") {
-            if ((int) sp.getValue() == mainFrame.currentCharacter.getAttributes()
+            if ((int) sp.getValue() ==  characterController.getCharacter().getAttributes()
                     .getMAXintuition()) {
                 if (mainFrame.maxAttributeIndex == -1) {
                     mainFrame.maxAttributeIndex = 5;
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getLogic() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setLogic(
+                     characterController.getCharacter().getAttributes().setLogic(
                             (int) sp.getValue());
                 } else {
                     JOptionPane
@@ -192,26 +195,26 @@ public class AttrPointsChange implements ChangeListener {
                 }
             } else {
                 if (mainFrame.maxAttributeIndex == 5) {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getLogic() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setLogic(
+                     characterController.getCharacter().getAttributes().setLogic(
                             (int) sp.getValue());
                     mainFrame.maxAttributeIndex = -1;
                 } else {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getLogic() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setLogic(
+                     characterController.getCharacter().getAttributes().setLogic(
                             (int) sp.getValue());
                 }
             }
         } else if (sp.getName() == "int") {
-            if ((int) sp.getValue() == mainFrame.currentCharacter.getAttributes()
+            if ((int) sp.getValue() ==  characterController.getCharacter().getAttributes()
                     .getMAXintuition()) {
                 if (mainFrame.maxAttributeIndex == -1) {
                     mainFrame.maxAttributeIndex = 6;
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getIntuition() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setIntuition(
+                     characterController.getCharacter().getAttributes().setIntuition(
                             (int) sp.getValue());
                 } else {
                     JOptionPane
@@ -223,26 +226,26 @@ public class AttrPointsChange implements ChangeListener {
                 }
             } else {
                 if (mainFrame.maxAttributeIndex == 6) {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getIntuition() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setIntuition(
+                     characterController.getCharacter().getAttributes().setIntuition(
                             (int) sp.getValue());
                     mainFrame.maxAttributeIndex = -1;
                 } else {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getIntuition() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setIntuition(
+                     characterController.getCharacter().getAttributes().setIntuition(
                             (int) sp.getValue());
                 }
             }
         } else if (sp.getName() == "cha") {
-            if ((int) sp.getValue() == mainFrame.currentCharacter.getAttributes()
+            if ((int) sp.getValue() ==  characterController.getCharacter().getAttributes()
                     .getMAXcharisma()) {
                 if (mainFrame.maxAttributeIndex == -1) {
                     mainFrame.maxAttributeIndex = 7;
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getCharisma() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setCharisma(
+                     characterController.getCharacter().getAttributes().setCharisma(
                             (int) sp.getValue());
                 } else {
                     JOptionPane
@@ -254,90 +257,90 @@ public class AttrPointsChange implements ChangeListener {
                 }
             } else {
                 if (mainFrame.maxAttributeIndex == 7) {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getCharisma() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setCharisma(
+                     characterController.getCharacter().getAttributes().setCharisma(
                             (int) sp.getValue());
                     mainFrame.maxAttributeIndex = -1;
                 } else {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getCharisma() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setCharisma(
+                     characterController.getCharacter().getAttributes().setCharisma(
                             (int) sp.getValue());
                 }
             }
         } else if (sp.getName() == "edg") {
-            if ((int) sp.getValue() < mainFrame.currentCharacter.getAttributes()
+            if ((int) sp.getValue() <  characterController.getCharacter().getAttributes()
                     .getEdge()
                     && mainFrame.charSpecialAttributes < mainFrame.initValueCharSpecialAttributes) {
-                mainFrame.charSpecialAttributes += mainFrame.currentCharacter.getAttributes()
+                mainFrame.charSpecialAttributes +=  characterController.getCharacter().getAttributes()
                         .getEdge() - (int) sp.getValue();
-                mainFrame.currentCharacter.getAttributes().setEdge(
+                 characterController.getCharacter().getAttributes().setEdge(
                         (int) sp.getValue());
             } else {
                 if (mainFrame.charSpecialAttributes > 0
                         && (mainFrame.charSpecialAttributes < mainFrame.initValueCharSpecialAttributes || ((int) sp
-                                .getValue() > mainFrame.currentCharacter
+                                .getValue() >  characterController.getCharacter()
                                 .getAttributes().getEdge()))) {
-                    mainFrame.charSpecialAttributes += mainFrame.currentCharacter
+                    mainFrame.charSpecialAttributes +=  characterController.getCharacter()
                             .getAttributes().getEdge()
                             - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setEdge(
+                     characterController.getCharacter().getAttributes().setEdge(
                             (int) sp.getValue());
                 } else {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getEdge() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setEdge(
+                     characterController.getCharacter().getAttributes().setEdge(
                             (int) sp.getValue());
                 }
             }
         } else if (sp.getName() == "mag") {
-            if ((int) sp.getValue() < mainFrame.currentCharacter.getAttributes()
+            if ((int) sp.getValue() <  characterController.getCharacter().getAttributes()
                     .getMagic()
                     && mainFrame.charSpecialAttributes < mainFrame.initValueCharSpecialAttributes) {
-                mainFrame.charSpecialAttributes += mainFrame.currentCharacter.getAttributes()
+                mainFrame.charSpecialAttributes +=  characterController.getCharacter().getAttributes()
                         .getMagic() - (int) sp.getValue();
-                mainFrame.currentCharacter.getAttributes().setMagic(
+                 characterController.getCharacter().getAttributes().setMagic(
                         (int) sp.getValue());
             } else {
                 if (mainFrame.charSpecialAttributes > 0
                         && (mainFrame.charSpecialAttributes < mainFrame.initValueCharSpecialAttributes || ((int) sp
-                                .getValue() > mainFrame.currentCharacter
+                                .getValue() >  characterController.getCharacter()
                                 .getAttributes().getMagic()))) {
-                    mainFrame.charSpecialAttributes += mainFrame.currentCharacter
+                    mainFrame.charSpecialAttributes +=  characterController.getCharacter()
                             .getAttributes().getMagic()
                             - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setMagic(
+                     characterController.getCharacter().getAttributes().setMagic(
                             (int) sp.getValue());
                 } else {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getMagic() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setMagic(
+                     characterController.getCharacter().getAttributes().setMagic(
                             (int) sp.getValue());
                 }
             }
         } else if (sp.getName() == "res") {
-            if ((int) sp.getValue() < mainFrame.currentCharacter.getAttributes()
+            if ((int) sp.getValue() <  characterController.getCharacter().getAttributes()
                     .getResonance()
                     && mainFrame.charSpecialAttributes < mainFrame.initValueCharSpecialAttributes) {
-                mainFrame.charSpecialAttributes += mainFrame.currentCharacter.getAttributes()
+                mainFrame.charSpecialAttributes +=  characterController.getCharacter().getAttributes()
                         .getResonance() - (int) sp.getValue();
-                mainFrame.currentCharacter.getAttributes().setResonance(
+                 characterController.getCharacter().getAttributes().setResonance(
                         (int) sp.getValue());
             } else {
                 if (mainFrame.charSpecialAttributes > 0
                         && (mainFrame.charSpecialAttributes < mainFrame.initValueCharSpecialAttributes || ((int) sp
-                                .getValue() > mainFrame.currentCharacter
+                                .getValue() >  characterController.getCharacter()
                                 .getAttributes().getResonance()))) {
-                    mainFrame.charSpecialAttributes += mainFrame.currentCharacter
+                    mainFrame.charSpecialAttributes +=  characterController.getCharacter()
                             .getAttributes().getResonance()
                             - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setResonance(
+                     characterController.getCharacter().getAttributes().setResonance(
                             (int) sp.getValue());
                 } else {
-                    mainFrame.charAttributes += mainFrame.currentCharacter.getAttributes()
+                    mainFrame.charAttributes +=  characterController.getCharacter().getAttributes()
                             .getResonance() - (int) sp.getValue();
-                    mainFrame.currentCharacter.getAttributes().setResonance(
+                     characterController.getCharacter().getAttributes().setResonance(
                             (int) sp.getValue());
                 }
             }

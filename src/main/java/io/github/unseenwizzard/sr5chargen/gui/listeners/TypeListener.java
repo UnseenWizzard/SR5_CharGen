@@ -1,5 +1,6 @@
 package io.github.unseenwizzard.sr5chargen.gui.listeners;
 
+import io.github.unseenwizzard.sr5chargen.control.CharacterController;
 import io.github.unseenwizzard.sr5chargen.gui.MainFrame;
 import io.github.unseenwizzard.sr5chargen.gui.TypePriority;
 
@@ -10,17 +11,19 @@ import java.awt.event.ActionListener;
 public class TypeListener implements ActionListener {
     private MainFrame mainFrame;
     TypePriority tP;
+    private final CharacterController characterController;
 
-    public TypeListener(MainFrame mainFrame, TypePriority tP) {
+    public TypeListener(MainFrame mainFrame, TypePriority tP,CharacterController characterController) {
         this.mainFrame = mainFrame;
         this.tP = tP;
+        this.characterController = characterController;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (mainFrame.charSpecialAttributes == -1) {
             for (int i = 0; i < tP.type.length; i++) {
-                if (tP.type[i] == mainFrame.currentCharacter.getPersonalData()
+                if (tP.type[i] == characterController.getCharacter().getPersonalData()
                         .getMetatype()) {
                     mainFrame.charSpecialAttributes = tP.specialAttributes[i];
                     mainFrame.initValueCharSpecialAttributes = mainFrame.charSpecialAttributes;

@@ -1,5 +1,6 @@
 package io.github.unseenwizzard.sr5chargen.gui.listeners;
 
+import io.github.unseenwizzard.sr5chargen.control.CharacterController;
 import io.github.unseenwizzard.sr5chargen.data.character.Skill;
 import io.github.unseenwizzard.sr5chargen.gui.MainFrame;
 
@@ -9,14 +10,14 @@ import javax.swing.event.ChangeListener;
 
 public class SkillKarmaRaise implements ChangeListener {
 
-    private MainFrame mainFrame;
     JSpinner karma = null;
     int skMax = 0;
+    private final CharacterController characterController;
 
-    public SkillKarmaRaise(MainFrame mainFrame, JSpinner karma, int skMax) {
-        this.mainFrame = mainFrame;
+    public SkillKarmaRaise(JSpinner karma, int skMax, CharacterController characterController) {
         this.karma = karma;
         this.skMax = skMax;
+        this.characterController = characterController;
     }
 
     @Override
@@ -24,7 +25,7 @@ public class SkillKarmaRaise implements ChangeListener {
         JSpinner sp = (JSpinner) arg0.getSource();
         int raise = (int) sp.getValue();
         Skill skill = null;
-        for (Skill s : mainFrame.currentCharacter.getSkills()) {
+        for (Skill s : characterController.getCharacter().getSkills()) {
             if (s.getName().equals(sp.getName())) {
                 skill = s;
                 if (s.isKnowledge()) {
@@ -33,14 +34,14 @@ public class SkillKarmaRaise implements ChangeListener {
                 break;
             }
         }
-        if (mainFrame.currentCharacter.getPersonalData().getKarma() >= raise * 2) {
+        if ( characterController.getCharacter().getPersonalData().getKarma() >= raise * 2) {
             skill.setValue((int) sp.getValue());
             sp.setModel(new SpinnerNumberModel(skill.getValue(), skill
                     .getValue(), skMax, 1));
-            mainFrame.currentCharacter.getPersonalData().setKarma(
-                    mainFrame.currentCharacter.getPersonalData().getKarma() - raise
+             characterController.getCharacter().getPersonalData().setKarma(
+                     characterController.getCharacter().getPersonalData().getKarma() - raise
                             * 2);
-            karma.setValue(mainFrame.currentCharacter.getPersonalData().getKarma());
+            karma.setValue( characterController.getCharacter().getPersonalData().getKarma());
 
         } else {
             sp.removeChangeListener(this);

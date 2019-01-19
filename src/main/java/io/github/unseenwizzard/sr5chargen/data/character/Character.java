@@ -101,34 +101,38 @@ public class Character implements Serializable, Comparable{
 	public void setMagicalness(Magical magicalness){
 		this.magicalness=magicalness;
 	}
-	
-	public Character(Metatype type, String name, Sex sex){
-		this.personalData=new PersData(type, name, sex);
+
+	public Character() {
 		this.attributes = new Attributes();
 		this.physicalDamageMax=0;
 		this.stunDamageMax=0;
 		this.money=0;
-		this.skills= new ArrayList<Skill>();
-		this.skillgroups= new ArrayList<SkillGroup>();
-		this.qualities= new ArrayList<Quality>();
-		this.contacts=new ArrayList<Contact>();
-		this.fakeIDs=new ArrayList<ID>();
-		this.rangedWeapons=new ArrayList<RangedWeapon>();
-		this.grenades=new ArrayList<Grenade>();
-		this.ammunition=new ArrayList<Ammunition>();
-		this.meeleWeapons=new ArrayList<MeeleWeapon>();
-		this.armor=new ArrayList<Armor>();
-		this.augmentations=new ArrayList<Augmentation>();
-		this.gear=new ArrayList<Gear>();
-		this.cyberdecks=new ArrayList<Deck>();
-		this.vehicles=new ArrayList<Vehicle>();
-		this.programs=new ArrayList<Program>();
-		this.spells=new ArrayList<Spell>(); 
-		this.preparations=new ArrayList<Spell>(); 
-		this.rituals=new ArrayList<Spell>(); 
-		this.complexForms=new ArrayList<Spell>();
-		this.adeptPowers= new ArrayList<Power>(); 
-		this.otherPowers= new ArrayList<Power>();
+		this.skills= new ArrayList<>();
+		this.skillgroups= new ArrayList<>();
+		this.qualities= new ArrayList<>();
+		this.contacts=new ArrayList<>();
+		this.fakeIDs=new ArrayList<>();
+		this.rangedWeapons=new ArrayList<>();
+		this.grenades=new ArrayList<>();
+		this.ammunition=new ArrayList<>();
+		this.meeleWeapons=new ArrayList<>();
+		this.armor=new ArrayList<>();
+		this.augmentations=new ArrayList<>();
+		this.gear=new ArrayList<>();
+		this.cyberdecks=new ArrayList<>();
+		this.vehicles=new ArrayList<>();
+		this.programs=new ArrayList<>();
+		this.spells=new ArrayList<>();
+		this.preparations=new ArrayList<>();
+		this.rituals=new ArrayList<>();
+		this.complexForms=new ArrayList<>();
+		this.adeptPowers= new ArrayList<>();
+		this.otherPowers= new ArrayList<>();
+	}
+
+	public Character(Metatype type, String name, Sex sex){
+		this();
+		this.personalData=new PersData(type, name, sex);
 	}
 
 	public void removeSkillGroup(SkillGroup skillgroup){
